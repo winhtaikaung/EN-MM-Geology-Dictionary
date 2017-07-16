@@ -1,7 +1,9 @@
-package com.rangon.en_mmgeologydictionary;
+package presentation;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.rangon.en_mmgeologydictionary.R;
 
 public class MainActivity extends AppCompatActivity {
 
