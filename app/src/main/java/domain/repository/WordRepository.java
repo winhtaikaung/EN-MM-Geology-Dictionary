@@ -1,6 +1,8 @@
 package domain.repository;
 
-import domain.model.Word;
+import java.util.List;
+
+import model.Word;
 import io.reactivex.Observable;
 
 /**
@@ -8,9 +10,9 @@ import io.reactivex.Observable;
  */
 
 public interface WordRepository {
-    Observable<Word> getWord(String id);
+    Observable<Word> getWord(String word);
 
-    Observable<Word> getLikelyWord(String searchkeyword);
+    Observable<List<Word>> getLikelyWord(String searchKeyword);
 
-    Observable<Word> getWordList(String page,String size);
+    Observable<List<Word>> getWordList(String page,String size);
 }

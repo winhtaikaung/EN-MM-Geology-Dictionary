@@ -1,8 +1,8 @@
-package presentation;
+package presentation.ui;
 
 /**
  * Created by winhtaikaung on 16/7/17.
  */
 
-public class presentation {
+public class ui {
 }
