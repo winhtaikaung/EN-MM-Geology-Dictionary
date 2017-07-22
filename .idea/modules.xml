@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/EN-MM-Geology-Dictionary.iml" filepath="$PROJECT_DIR$/EN-MM-Geology-Dictionary.iml" />
       <module fileurl="file://$PROJECT_DIR$/EN-MMGeologyDictionary.iml" filepath="$PROJECT_DIR$/EN-MMGeologyDictionary.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
