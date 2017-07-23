@@ -13,37 +13,45 @@ import util.IndexingUtil;
 
 
 public class WordDAC {
-    private static List<Word> lstword = new ArrayList();
-    private static List<String> strlstword = new ArrayList();
     static Context mContext;
     private static DBHelper dbhelper;
     private static WordDAC dac;
+    IndexingUtil indexingUtil;
 
     public WordDAC instance(Context c) {
         mContext = c;
         if (dac == null) {
 
             dac = new WordDAC();
+            indexingUtil = new IndexingUtil();
+            mContext = c;
         }
         return dac;
     }
 
-    public static List<Word> getLikelyWords(Word o, String TableName) {
+    public List<Word> getLikelyWords(String o) {
         DBHelper db = new DBHelper(mContext);
-        String sql = "SELECT word,desc,type,IsFavourite FROM " + TableName + " WHERE word LIKE '" + o.getWord() + "%'";
+        String tableName = indexingUtil.gettableName(o.charAt(0));
+        String sql = "SELECT word,meaning_zg,type,is_fav FROM " + tableName + " WHERE word LIKE '" + o + "%'";
         Log.i("after query", "after query");
         ArrayList<HashMap<String, String>> alist = null;
         List<Word> wordlist = new ArrayList<>();
-        alist = db.getDataTable(sql);
-        Log.i("alist", String.valueOf(alist.size()));
-        for (int i = 0; i < alist.size(); i++) {
-            HashMap tablerow = (HashMap) alist.get(i);
-            Word w = new Word();
-            w.setWord(tablerow.get("word").toString().toLowerCase());
-            w.setMeaningZg(tablerow.get("desc").toString().toLowerCase());
-            w.setType(tablerow.get("type").toString().toLowerCase());
-            w.setFav(Boolean.valueOf(tablerow.get("IsFavourite").toString().toLowerCase()));
-            wordlist.add(w);
+        try {
+
+            alist = db.getDataTable(sql);
+            Log.i("alist", String.valueOf(alist.size()));
+            for (int i = 0; i < alist.size(); i++) {
+                HashMap tablerow = (HashMap) alist.get(i);
+                Word w = new Word();
+                w.setWord(tablerow.get("word").toString().toLowerCase());
+                w.setMeaningZg(tablerow.get("meaning_zg").toString().toLowerCase());
+                w.setMeaningUni(tablerow.get("meaning_uni").toString());
+                w.setType(tablerow.get("type").toString().toLowerCase());
+                w.setFav(Boolean.valueOf(tablerow.get("is_fav").toString().toLowerCase()));
+                wordlist.add(w);
+            }
+        } catch (NullPointerException ex) {
+            ex.printStackTrace();
         }
         return wordlist;
     }
@@ -51,7 +59,7 @@ public class WordDAC {
     public boolean InsertWord(Word o, String TableName) {
 
         DBHelper db = new DBHelper(mContext);
-        String sql = "INSERT INTO " + TableName + " (word,type,desc) values ('" + o.getWord().toLowerCase() + "','" + o.getType() + "','" + o.getMeaningZg() + "',,'" + o.getMeaningUni() + "');";
+        String sql = "INSERT INTO " + TableName + " (word,type,meaning_zg) values ('" + o.getWord().toLowerCase() + "','" + o.getType() + "','" + o.getMeaningZg() + "',,'" + o.getMeaningUni() + "');";
         try {
             //db.(sql);
             return true;
@@ -78,17 +86,17 @@ public class WordDAC {
         ArrayList aList;
         DBHelper db = new DBHelper(mContext);
         firstCharacter = inputWord.charAt(0);
-        IndexingUtil index = new IndexingUtil();
-        String TableName = index.gettableName(firstCharacter);
+        String TableName = indexingUtil.gettableName(firstCharacter);
         String sql = "SELECT * FROM " + TableName.toLowerCase() + " where word = '" + inputWord + "'";
         aList = db.getDataRow(sql);
         HashMap tableRow = (HashMap) aList.get(0);
         Word w = new Word();
         if (tableRow.size() != 0) {
             w.setWord(tableRow.get("word").toString().toLowerCase());
-            w.setMeaningZg(tableRow.get("desc").toString());
+            w.setMeaningZg(tableRow.get("meaning_zg").toString());
+            w.setMeaningUni(tableRow.get("meaning_uni").toString());
             w.setType(tableRow.get("type").toString().toLowerCase());
-            w.setFav(Boolean.valueOf(tableRow.get("IsFavourite").toString().toLowerCase()));
+            w.setFav(Boolean.valueOf(tableRow.get("is_fav").toString().toLowerCase()));
             return w;
         } else {
             return w;
