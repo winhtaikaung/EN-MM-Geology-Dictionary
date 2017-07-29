@@ -9,9 +9,31 @@ public class Word {
     private String type;
     private String meaningZg;
     private String meaningUni;
-    private String character;
+    private char character;
     private String remark;
     private boolean isFav;
+
+    public Word(){
+
+    }
+
+    /**
+     *
+     * @param word
+     * @param type
+     * @param meaningZg
+     * @param meaningUni
+     * @param remark
+     * @param isFav
+     */
+    public Word(String word, String type, String meaningZg, String meaningUni, String remark, boolean isFav) {
+        this.word = word;
+        this.type = type;
+        this.meaningZg = meaningZg;
+        this.meaningUni = meaningUni;
+        this.remark = remark;
+        this.isFav = isFav;
+    }
 
     public String getWord() {
         return word;
@@ -45,11 +67,11 @@ public class Word {
         this.meaningUni = meaningUni;
     }
 
-    public String getCharacter() {
-        return character;
+    public char getCharacter() {
+        return (!this.word.isEmpty() && this.word != null) ? this.word.toCharArray()[0] : ' ';
     }
 
-    public void setCharacter(String character) {
+    public void setCharacter(char character) {
         this.character = character;
     }
 

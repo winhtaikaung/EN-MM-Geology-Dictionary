@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'me.tatarka.retrolambda'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -11,6 +11,10 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -19,14 +23,12 @@ android {
     }
     productFlavors {
         develop {
-            applicationId
-            "com.rangon.en_mmgeologydictionary.develop"
-            versionName "1.0.0"
+            applicationIdSuffix ".dev"
         }
-        stable {
-            applicationId
-            "com.rangon.en_mmgeologydictionary.stable"
-            versionName "1.0.0"
+        staging {
+            applicationIdSuffix ".stage"
+        }
+        production {
         }
     }
 }
@@ -41,6 +43,7 @@ dependencies {
 
     compile 'io.reactivex.rxjava2:rxjava:2.0.2'
 
+    testCompile 'org.mockito:mockito-core:1.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
     testCompile 'junit:junit:4.12'
 }
