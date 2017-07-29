@@ -2,7 +2,7 @@ package data.repository.datasource;
 
 import java.util.List;
 
-import data.repository.service.WordDAC;
+import data.service.WordDAC;
 import io.reactivex.Observable;
 import model.Word;
 

@@ -1,4 +1,4 @@
-package data.repository.service;
+package data.service;
 
 import android.content.Context;
 import android.util.Log;

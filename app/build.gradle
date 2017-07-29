@@ -20,12 +20,12 @@ android {
     productFlavors {
         develop {
             applicationId
-            "com.rangon.en_mmgeologydictionary_develop"
+            "com.rangon.en_mmgeologydictionary.develop"
             versionName "1.0.0"
         }
         stable {
             applicationId
-            "com.rangon.en_mmgeologydictionary_stable"
+            "com.rangon.en_mmgeologydictionary.stable"
             versionName "1.0.0"
         }
     }
