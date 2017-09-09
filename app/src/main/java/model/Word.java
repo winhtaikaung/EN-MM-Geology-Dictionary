@@ -1,24 +1,40 @@
 package model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import org.rabbitconverter.rabbit.Rabbit;
+
 /**
  * Created by winhtaikaung on 17/7/17.
  */
 
 public class Word {
+    @SerializedName("word")
+    @Expose
     private String word;
+    @SerializedName("type")
+    @Expose
     private String type;
+    @SerializedName("meaning_zg")
+    @Expose
     private String meaningZg;
+    @SerializedName("meaning_uni")
+    @Expose
     private String meaningUni;
     private char character;
+    @SerializedName("remark")
+    @Expose
     private String remark;
-    private boolean isFav;
+    @SerializedName("is_fav")
+    @Expose
+    private Boolean isFav;
 
-    public Word(){
+    public Word() {
 
     }
 
     /**
-     *
      * @param word
      * @param type
      * @param meaningZg
@@ -60,11 +76,11 @@ public class Word {
     }
 
     public String getMeaningUni() {
-        return meaningUni;
+        return Rabbit.zg2uni(meaningUni);
     }
 
     public void setMeaningUni(String meaningUni) {
-        this.meaningUni = meaningUni;
+        this.meaningUni = Rabbit.zg2uni(meaningUni);
     }
 
     public char getCharacter() {
@@ -89,5 +105,10 @@ public class Word {
 
     public void setFav(boolean fav) {
         isFav = fav;
+    }
+
+    @Override
+    public String toString() {
+        return word + type + meaningZg + remark;
     }
 }

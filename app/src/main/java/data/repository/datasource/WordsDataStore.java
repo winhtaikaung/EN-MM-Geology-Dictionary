@@ -14,5 +14,13 @@ public interface WordsDataStore {
 
     Observable<List<Word>> getLikelyWord(String searchKeyword);
 
-    Observable<List<Word>> getWordList(String page, String size);
+    /**
+     * @param wordIndex a,b,c..etc
+     * @param page
+     * @param size
+     * @return
+     */
+    Observable<List<Word>> getWordList(String wordIndex, int page, int size);
+
+    Observable<Boolean> insertWordList(List<Word> wordList, String tableName);
 }

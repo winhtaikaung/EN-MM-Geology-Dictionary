@@ -12,17 +12,17 @@ import util.DBHelper;
 import util.IndexingUtil;
 
 
-public class WordDAC {
+public class WordDAL {
     static Context mContext;
     private static DBHelper dbhelper;
-    private static WordDAC dac;
+    private static WordDAL dac;
     IndexingUtil indexingUtil;
 
-    public WordDAC instance(Context c) {
+    public WordDAL instance(Context c) {
         mContext = c;
         if (dac == null) {
 
-            dac = new WordDAC();
+            dac = new WordDAL();
             indexingUtil = new IndexingUtil();
             mContext = c;
         }
@@ -68,6 +68,21 @@ public class WordDAC {
         }
     }
 
+    public boolean bulkInsertWord(List<Word> listword, String tableName) {
+        DBHelper db = new DBHelper(mContext);
+        ArrayList<String> insertQueries = new ArrayList<>();
+        for (Word o : listword) {
+            String sql = "INSERT INTO " + tableName + " (word,type,meaning_zg) values ('" + o.getWord().toLowerCase() + "','" + o.getType() + "','" + o.getMeaningZg() + "',,'" + o.getMeaningUni() + "');";
+            insertQueries.add(sql);
+        }
+        try {
+            db.bulkInsert(insertQueries);
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+
     public boolean DeleteWord(Word o, String TableName) {
 
         DBHelper db = new DBHelper(mContext);
@@ -102,4 +117,6 @@ public class WordDAC {
             return w;
         }
     }
+
+
 }

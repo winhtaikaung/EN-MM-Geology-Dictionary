@@ -21,12 +21,11 @@ import java.util.HashMap;
  */
 
 
-
 public class DBHelper extends SQLiteOpenHelper {
-    private static String DB_PATH = "";
     static String DB_NAME = "dict.db";
-    private SQLiteDatabase myDataBase;
+    private static String DB_PATH = "";
     private final Context myContext;
+    private SQLiteDatabase myDataBase;
 
     public DBHelper(Context context) {
         super(context, DB_NAME, null, 1);
@@ -175,6 +174,15 @@ public class DBHelper extends SQLiteOpenHelper {
     public void executeQuery(String SQL) throws SQLiteException {
         SQLiteDatabase database = this.getWritableDatabase();
         database.execSQL(SQL);
+        database.close();
+    }
+
+    public void bulkInsert(ArrayList<String> arrSql) throws SQLiteException {
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        for (String sql : arrSql) {
+            myDataBase.execSQL(sql);
+        }
         database.close();
     }
 

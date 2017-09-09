@@ -2,7 +2,7 @@ package data.repository.datasource;
 
 import java.util.List;
 
-import data.service.WordDAC;
+import data.service.WordDAL;
 import io.reactivex.Observable;
 import model.Word;
 
@@ -11,24 +11,30 @@ import model.Word;
  */
 
 public class WordsLocalDataStore implements WordsDataStore {
-    private WordDAC wordDac;
+    private WordDAL wordDAL;
+
     public WordsLocalDataStore() {
-        wordDac = new WordDAC();
+        wordDAL = new WordDAL();
     }
 
 
     @Override
     public Observable<Word> getWord(String word) {
-        return Observable.just(wordDac.getByWord(word));
+        return Observable.just(wordDAL.getByWord(word));
     }
 
     @Override
     public Observable<List<Word>> getLikelyWord(String searchKeyword) {
-        return Observable.just(wordDac.getLikelyWords(searchKeyword));
+        return Observable.just(wordDAL.getLikelyWords(searchKeyword));
     }
 
     @Override
-    public Observable<List<Word>> getWordList(String page, String size) {
+    public Observable<List<Word>> getWordList(String wordIndex, int page, int size) {
         return null;
+    }
+
+    @Override
+    public Observable<Boolean> insertWordList(List<Word> wordList, String tableName) {
+        return Observable.just(wordDAL.bulkInsertWord(wordList, tableName));
     }
 }

@@ -14,5 +14,11 @@ public interface WordRepository {
 
     Observable<List<Word>> getLikelyWord(String searchKeyword);
 
-    Observable<List<Word>> getWordList(String page,String size);
+    /**
+     * @param wordIndex a,b,c,..z etc
+     * @param page
+     * @param size
+     * @return
+     */
+    Observable<List<Word>> getWordList(String wordIndex, int page, int size);
 }
