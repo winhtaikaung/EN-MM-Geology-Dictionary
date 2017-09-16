@@ -12,13 +12,13 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.List;
 
-import domain.executor.Executor;
-import domain.executor.MainThread;
-import domain.interactors.GetLikelyWordsInteractor;
-import domain.interactors.impl.GetLikelyWordsInteractorImpl;
-import domain.repository.WordRepository;
+import com.rangon.en_mmgeologydictionary.domain.executor.Executor;
+import com.rangon.en_mmgeologydictionary.domain.executor.MainThread;
+import com.rangon.en_mmgeologydictionary.domain.interactors.GetLikelyWordsInteractor;
+import com.rangon.en_mmgeologydictionary.domain.interactors.impl.GetLikelyWordsInteractorImpl;
+import com.rangon.en_mmgeologydictionary.domain.repository.WordRepository;
 import io.reactivex.Observable;
-import model.Word;
+import com.rangon.en_mmgeologydictionary.model.Word;
 
 import static org.mockito.Mockito.when;
 

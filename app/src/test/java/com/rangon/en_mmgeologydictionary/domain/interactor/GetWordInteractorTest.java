@@ -9,13 +9,13 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import domain.executor.Executor;
-import domain.executor.MainThread;
-import domain.interactors.GetWordInteractor;
-import domain.interactors.impl.GetWordInteractorImpl;
-import domain.repository.WordRepository;
+import com.rangon.en_mmgeologydictionary.domain.executor.Executor;
+import com.rangon.en_mmgeologydictionary.domain.executor.MainThread;
+import com.rangon.en_mmgeologydictionary.domain.interactors.GetWordInteractor;
+import com.rangon.en_mmgeologydictionary.domain.interactors.impl.GetWordInteractorImpl;
+import com.rangon.en_mmgeologydictionary.domain.repository.WordRepository;
 import io.reactivex.Observable;
-import model.Word;
+import com.rangon.en_mmgeologydictionary.model.Word;
 
 import static org.mockito.Mockito.when;
 

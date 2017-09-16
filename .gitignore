@@ -47,7 +47,7 @@ captures/
 .externalNativeBuild
 
 # Google Services (e.g. APIs or Firebase)
-google-services.json
+google-com.rangon.en_mmgeologydictionary.services.json
 
 # Freeline
 freeline.py

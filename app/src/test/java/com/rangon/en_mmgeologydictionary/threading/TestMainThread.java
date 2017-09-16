@@ -1,7 +1,7 @@
 package com.rangon.en_mmgeologydictionary.threading;
 
 
-import domain.executor.MainThread;
+import com.rangon.en_mmgeologydictionary.domain.executor.MainThread;
 
 /**
  * Created by dmilicic on 1/8/16.
