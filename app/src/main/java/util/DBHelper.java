@@ -22,7 +22,7 @@ import java.util.HashMap;
 
 
 public class DBHelper extends SQLiteOpenHelper {
-    static String DB_NAME = "dict.db";
+    static String DB_NAME = "db_geodictionary.sqlite";
     private static String DB_PATH = "";
     private final Context myContext;
     private SQLiteDatabase myDataBase;
