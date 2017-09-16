@@ -1,13 +1,13 @@
 package com.rangon.en_mmgeologydictionary.domain.executor.impl;
 
 
+import com.rangon.en_mmgeologydictionary.domain.executor.Executor;
+import com.rangon.en_mmgeologydictionary.domain.interactors.base.AbstractInteractor;
+
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-
-import com.rangon.en_mmgeologydictionary.domain.executor.Executor;
-import com.rangon.en_mmgeologydictionary.domain.interactors.base.AbstractInteractor;
 
 /**
  * This singleton class will make sure that each interactor operation gets a background thread.

@@ -174,17 +174,30 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void executeQuery(String SQL) throws SQLiteException {
         SQLiteDatabase database = this.getWritableDatabase();
-        database.execSQL(SQL);
-        database.close();
+        try {
+            database.execSQL(SQL);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            database.close();
+        }
+
     }
 
     public void bulkInsert(ArrayList<String> arrSql) throws SQLiteException {
         SQLiteDatabase database = this.getWritableDatabase();
+        try {
+            for (String sql : arrSql) {
 
-        for (String sql : arrSql) {
-            myDataBase.execSQL(sql);
+                database.execSQL(sql);
+
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            database.close();
         }
-        database.close();
+
     }
 
     @Override

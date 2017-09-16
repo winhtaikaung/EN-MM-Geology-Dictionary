@@ -1,9 +1,10 @@
 package com.rangon.en_mmgeologydictionary.data.repository.datasource;
 
+import com.rangon.en_mmgeologydictionary.model.Word;
+
 import java.util.List;
 
 import io.reactivex.Observable;
-import com.rangon.en_mmgeologydictionary.model.Word;
 
 /**
  * Created by winhtaikaung on 16/7/17.

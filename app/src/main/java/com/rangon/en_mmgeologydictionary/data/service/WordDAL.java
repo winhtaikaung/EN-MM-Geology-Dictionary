@@ -3,13 +3,14 @@ package com.rangon.en_mmgeologydictionary.data.service;
 import android.content.Context;
 import android.util.Log;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import com.rangon.en_mmgeologydictionary.model.Word;
 import com.rangon.en_mmgeologydictionary.util.DBHelper;
 import com.rangon.en_mmgeologydictionary.util.IndexingUtil;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 
 
 public class WordDAL {
@@ -18,15 +19,9 @@ public class WordDAL {
     private static WordDAL dac;
     IndexingUtil indexingUtil;
 
-    public WordDAL instance(Context c) {
+    public WordDAL(Context c) {
         mContext = c;
-        if (dac == null) {
-
-            dac = new WordDAL();
-            indexingUtil = new IndexingUtil();
-            mContext = c;
-        }
-        return dac;
+        indexingUtil = new IndexingUtil();
     }
 
     public List<Word> getLikelyWords(String o) {
@@ -72,7 +67,7 @@ public class WordDAL {
         DBHelper db = new DBHelper(mContext);
         ArrayList<String> insertQueries = new ArrayList<>();
         for (Word o : listword) {
-            String sql = "INSERT INTO " + tableName + " (word,type,meaning_zg) values ('" + o.getWord().toLowerCase() + "','" + o.getType() + "','" + o.getMeaningZg() + "',,'" + o.getMeaningUni() + "');";
+            String sql = "INSERT INTO " + tableName + " (id,word,type,meaning_zg,meaning_uni) values ('" + UUID.randomUUID().toString() + "','" + o.getWord().toLowerCase() + "','" + o.getType() + "','" + o.getMeaningZg() + "','" + o.getMeaningUni() + "');";
             insertQueries.add(sql);
         }
         try {

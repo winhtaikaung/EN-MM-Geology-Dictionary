@@ -5,8 +5,9 @@ import com.rangon.en_mmgeologydictionary.domain.executor.MainThread;
 import com.rangon.en_mmgeologydictionary.domain.interactors.GetWordInteractor;
 import com.rangon.en_mmgeologydictionary.domain.interactors.base.AbstractInteractor;
 import com.rangon.en_mmgeologydictionary.domain.repository.WordRepository;
-import io.reactivex.Observable;
 import com.rangon.en_mmgeologydictionary.model.Word;
+
+import io.reactivex.Observable;
 
 /**
  * Created by win on 7/29/17.

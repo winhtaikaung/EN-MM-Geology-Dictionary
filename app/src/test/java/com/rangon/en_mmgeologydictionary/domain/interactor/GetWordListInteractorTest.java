@@ -1,6 +1,12 @@
 package com.rangon.en_mmgeologydictionary.domain.interactor;
 
 
+import com.rangon.en_mmgeologydictionary.domain.executor.Executor;
+import com.rangon.en_mmgeologydictionary.domain.executor.MainThread;
+import com.rangon.en_mmgeologydictionary.domain.interactors.GetWordListInteractor;
+import com.rangon.en_mmgeologydictionary.domain.interactors.impl.GetWordListInteractorImpl;
+import com.rangon.en_mmgeologydictionary.domain.repository.WordRepository;
+import com.rangon.en_mmgeologydictionary.model.Word;
 import com.rangon.en_mmgeologydictionary.threading.TestMainThread;
 
 import org.junit.Before;
@@ -12,13 +18,7 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.rangon.en_mmgeologydictionary.domain.executor.Executor;
-import com.rangon.en_mmgeologydictionary.domain.executor.MainThread;
-import com.rangon.en_mmgeologydictionary.domain.interactors.GetWordListInteractor;
-import com.rangon.en_mmgeologydictionary.domain.interactors.impl.GetWordListInteractorImpl;
-import com.rangon.en_mmgeologydictionary.domain.repository.WordRepository;
 import io.reactivex.Observable;
-import com.rangon.en_mmgeologydictionary.model.Word;
 
 import static org.mockito.Mockito.when;
 

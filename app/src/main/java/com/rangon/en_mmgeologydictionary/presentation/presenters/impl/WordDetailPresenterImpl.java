@@ -5,10 +5,11 @@ import com.rangon.en_mmgeologydictionary.domain.executor.MainThread;
 import com.rangon.en_mmgeologydictionary.domain.interactors.GetWordInteractor;
 import com.rangon.en_mmgeologydictionary.domain.interactors.impl.GetWordInteractorImpl;
 import com.rangon.en_mmgeologydictionary.domain.repository.WordRepository;
-import io.reactivex.Observable;
 import com.rangon.en_mmgeologydictionary.model.Word;
 import com.rangon.en_mmgeologydictionary.presentation.presenters.AbstractPresenter;
 import com.rangon.en_mmgeologydictionary.presentation.presenters.WordDetailPresenter;
+
+import io.reactivex.Observable;
 
 /**
  * Created by winhtaikaung on 29/7/17.

@@ -1,8 +1,9 @@
 package com.rangon.en_mmgeologydictionary.services;
 
-import io.reactivex.Observable;
 import com.rangon.en_mmgeologydictionary.model.restmodels.WordListResponse;
 import com.rangon.en_mmgeologydictionary.network.Endpoints;
+
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 

@@ -1,14 +1,15 @@
 package com.rangon.en_mmgeologydictionary.domain.interactors.impl;
 
-import java.util.List;
-
 import com.rangon.en_mmgeologydictionary.domain.executor.Executor;
 import com.rangon.en_mmgeologydictionary.domain.executor.MainThread;
 import com.rangon.en_mmgeologydictionary.domain.interactors.GetLikelyWordsInteractor;
 import com.rangon.en_mmgeologydictionary.domain.interactors.base.AbstractInteractor;
 import com.rangon.en_mmgeologydictionary.domain.repository.WordRepository;
-import io.reactivex.Observable;
 import com.rangon.en_mmgeologydictionary.model.Word;
+
+import java.util.List;
+
+import io.reactivex.Observable;
 
 /**
  * Created by winhtaikaung on 16/7/17.

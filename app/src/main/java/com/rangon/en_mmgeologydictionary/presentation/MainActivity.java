@@ -2,39 +2,75 @@ package com.rangon.en_mmgeologydictionary.presentation;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.rangon.en_mmgeologydictionary.R;
+import com.rangon.en_mmgeologydictionary.data.repository.ApiConfigDataRepository;
+import com.rangon.en_mmgeologydictionary.data.repository.WordsDataRepository;
+import com.rangon.en_mmgeologydictionary.data.repository.datasource.ApiConfigDataStoreFactory;
+import com.rangon.en_mmgeologydictionary.data.repository.datasource.WordDataStoreFactory;
+import com.rangon.en_mmgeologydictionary.data.service.WordDAL;
+import com.rangon.en_mmgeologydictionary.domain.executor.impl.ThreadExecutor;
 import com.rangon.en_mmgeologydictionary.model.Word;
-import com.rangon.en_mmgeologydictionary.services.WordService;
+import com.rangon.en_mmgeologydictionary.presentation.presenters.MainScreenPresenter;
+import com.rangon.en_mmgeologydictionary.presentation.presenters.impl.MainScreenPresenterImpl;
+import com.rangon.en_mmgeologydictionary.threading.MainThreadImpl;
 
 import java.util.List;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
-import static com.rangon.en_mmgeologydictionary.network.RestClient.getRetrofit;
+public class MainActivity extends AppCompatActivity implements MainScreenPresenter.View {
 
+    private MainScreenPresenter mMainScreenPresenter;
+    private WordDataStoreFactory mWordDataStoreFactory;
+    private WordsDataRepository mWordDataRepository;
 
-public class MainActivity extends AppCompatActivity {
+    private ApiConfigDataStoreFactory mApiConfigDataStoreFactory;
+    private ApiConfigDataRepository mApiConfigDataRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getRetrofit().create(WordService.class).getWordList("a", Integer.parseInt("1"), Integer.parseInt("10"))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .map(wordListResponse ->
-                        wordListResponse.getData())
-                .subscribe(new Consumer<List<Word>>() {
-                    @Override
-                    public void accept(List<Word> words) throws Exception {
-                        Log.e("WORDS_UNI", String.valueOf(words.get(0).getMeaningUni()));
-                        Log.e("WORDS_ZAWGYI", String.valueOf(words.get(0).getMeaningZg()));
-                    }
-                });
+        mApiConfigDataStoreFactory = new ApiConfigDataStoreFactory();
+        mWordDataStoreFactory = new WordDataStoreFactory();
+
+        mWordDataRepository = new WordsDataRepository(mWordDataStoreFactory, new WordDAL(this));
+        mApiConfigDataRepository = new ApiConfigDataRepository(mApiConfigDataStoreFactory);
+
+        mMainScreenPresenter = new MainScreenPresenterImpl(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(),
+                this, mWordDataRepository, mApiConfigDataRepository);
+
+        mMainScreenPresenter.loadInitialData(1, 100);
+    }
+
+    @Override
+    public void onLoadInitialData(boolean isLoaded) {
+
+    }
+
+    @Override
+    public void onWordListLoaded(List<Word> wordList) {
+
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
+
+    @Override
+    public void showError(String message) {
+
+    }
+
+    @Override
+    public void hideError(String message) {
+
     }
 }

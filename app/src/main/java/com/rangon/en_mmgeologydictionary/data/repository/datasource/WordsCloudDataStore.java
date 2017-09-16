@@ -1,13 +1,14 @@
 package com.rangon.en_mmgeologydictionary.data.repository.datasource;
 
+import com.rangon.en_mmgeologydictionary.data.service.WordDAL;
+import com.rangon.en_mmgeologydictionary.model.Word;
+import com.rangon.en_mmgeologydictionary.services.WordService;
+
 import java.util.List;
 
-import com.rangon.en_mmgeologydictionary.data.service.WordDAL;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import com.rangon.en_mmgeologydictionary.model.Word;
-import com.rangon.en_mmgeologydictionary.services.WordService;
 
 import static com.rangon.en_mmgeologydictionary.network.RestClient.getRetrofit;
 

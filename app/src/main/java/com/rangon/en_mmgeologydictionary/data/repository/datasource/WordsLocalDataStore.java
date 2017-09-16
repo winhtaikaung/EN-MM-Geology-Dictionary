@@ -1,31 +1,32 @@
 package com.rangon.en_mmgeologydictionary.data.repository.datasource;
 
+import com.rangon.en_mmgeologydictionary.data.service.WordDAL;
+import com.rangon.en_mmgeologydictionary.model.Word;
+
 import java.util.List;
 
-import com.rangon.en_mmgeologydictionary.data.service.WordDAL;
 import io.reactivex.Observable;
-import com.rangon.en_mmgeologydictionary.model.Word;
 
 /**
  * Created by winhtaikaung on 16/7/17.
  */
 
 public class WordsLocalDataStore implements WordsDataStore {
-    private WordDAL wordDAL;
+    private WordDAL mWordDal;
 
-    public WordsLocalDataStore() {
-        wordDAL = new WordDAL();
+    public WordsLocalDataStore(WordDAL wordDAL) {
+        this.mWordDal = wordDAL;
     }
 
 
     @Override
     public Observable<Word> getWord(String word) {
-        return Observable.just(wordDAL.getByWord(word));
+        return Observable.just(mWordDal.getByWord(word));
     }
 
     @Override
     public Observable<List<Word>> getLikelyWord(String searchKeyword) {
-        return Observable.just(wordDAL.getLikelyWords(searchKeyword));
+        return Observable.just(mWordDal.getLikelyWords(searchKeyword));
     }
 
     @Override
@@ -35,6 +36,6 @@ public class WordsLocalDataStore implements WordsDataStore {
 
     @Override
     public Observable<Boolean> insertWordList(List<Word> wordList, String tableName) {
-        return Observable.just(wordDAL.bulkInsertWord(wordList, tableName));
+        return Observable.just(mWordDal.bulkInsertWord(wordList, tableName));
     }
 }
