@@ -35,6 +35,7 @@ public class GetWordListInteractorImpl extends AbstractInteractor implements Get
     @Override
     public void run() {
         final Observable<List<Word>> wordObservable = mRepository.getWordList(mWordIndex, mPage, mLimit);
+
         mMainThread.post(() -> {
             mCallback.onWordListRetrieved(wordObservable);
         });

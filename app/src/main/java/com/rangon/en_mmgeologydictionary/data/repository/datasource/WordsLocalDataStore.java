@@ -1,8 +1,10 @@
 package com.rangon.en_mmgeologydictionary.data.repository.datasource;
 
+import com.rangon.en_mmgeologydictionary.data.cache.AppDataCache;
 import com.rangon.en_mmgeologydictionary.data.service.WordDAL;
 import com.rangon.en_mmgeologydictionary.model.Word;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -13,9 +15,11 @@ import io.reactivex.Observable;
 
 public class WordsLocalDataStore implements WordsDataStore {
     private WordDAL mWordDal;
+    private AppDataCache mAppDataCache;
 
-    public WordsLocalDataStore(WordDAL wordDAL) {
+    public WordsLocalDataStore(WordDAL wordDAL, AppDataCache cache) {
         this.mWordDal = wordDAL;
+        this.mAppDataCache = cache;
     }
 
 
@@ -31,7 +35,8 @@ public class WordsLocalDataStore implements WordsDataStore {
 
     @Override
     public Observable<List<Word>> getWordList(String wordIndex, int page, int size) {
-        return null;
+        // TODO fetch wordlist locally
+        return Observable.just(new ArrayList<Word>());
     }
 
     @Override

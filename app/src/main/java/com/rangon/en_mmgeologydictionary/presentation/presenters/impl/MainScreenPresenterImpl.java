@@ -1,5 +1,7 @@
 package com.rangon.en_mmgeologydictionary.presentation.presenters.impl;
 
+import android.util.Log;
+
 import com.rangon.en_mmgeologydictionary.data.repository.ApiConfigDataRepository;
 import com.rangon.en_mmgeologydictionary.domain.executor.Executor;
 import com.rangon.en_mmgeologydictionary.domain.executor.MainThread;
@@ -56,15 +58,18 @@ public class MainScreenPresenterImpl extends AbstractPresenter implements MainSc
 
     @Override
     public void onApiConfigListReceived(Observable<List<ApiConfig>> apiconfigList) {
-        apiconfigList.doOnError(throwable -> mView.onLoadInitialData(false))
+        apiconfigList.doOnError(throwable ->
+                mView.onLoadInitialData(false))
                 .subscribe(apiConfigs -> {
                     for (ApiConfig config : apiConfigs) {
-                        for (int i = 1; i <= config.getPageCount(); i++) {
+                        for (int i = 0; i <= config.getPageCount(); i++) {
+                            Log.e("PAGE-->",String.valueOf(i));
                             GetWordListInteractor getWordListInteractor = new GetWordListInteractorImpl(mExecutor,
                                     mMainThread,
                                     mWordRepository, config.getWordIndex(), i, 100, MainScreenPresenterImpl.this);
                             getWordListInteractor.execute();
                         }
+                        Thread.sleep(500);
                     }
                 });
     }

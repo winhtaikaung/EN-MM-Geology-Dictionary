@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.rangon.en_mmgeologydictionary.R;
+import com.rangon.en_mmgeologydictionary.data.cache.AppDataCacheImpl;
 import com.rangon.en_mmgeologydictionary.data.repository.ApiConfigDataRepository;
 import com.rangon.en_mmgeologydictionary.data.repository.WordsDataRepository;
 import com.rangon.en_mmgeologydictionary.data.repository.datasource.ApiConfigDataStoreFactory;
@@ -33,15 +34,16 @@ public class MainActivity extends AppCompatActivity implements MainScreenPresent
         setContentView(R.layout.activity_main);
 
         mApiConfigDataStoreFactory = new ApiConfigDataStoreFactory();
-        mWordDataStoreFactory = new WordDataStoreFactory();
+        mWordDataStoreFactory = new WordDataStoreFactory(new AppDataCacheImpl(this));
 
         mWordDataRepository = new WordsDataRepository(mWordDataStoreFactory, new WordDAL(this));
         mApiConfigDataRepository = new ApiConfigDataRepository(mApiConfigDataStoreFactory);
 
         mMainScreenPresenter = new MainScreenPresenterImpl(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(),
                 this, mWordDataRepository, mApiConfigDataRepository);
-
-        mMainScreenPresenter.loadInitialData(1, 100);
+        if(!new AppDataCacheImpl(this).isCached()) {
+            mMainScreenPresenter.loadInitialData(1, 100);
+        }
     }
 
     @Override
