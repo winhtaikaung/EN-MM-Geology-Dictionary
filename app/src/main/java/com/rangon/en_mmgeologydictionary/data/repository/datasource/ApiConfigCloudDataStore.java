@@ -29,7 +29,7 @@ public class ApiConfigCloudDataStore implements ApiConfigDataStore {
                 .doOnError(new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        Log.e("ERROR",throwable.getMessage());
+                        Log.e("ERROR", throwable.getMessage());
                     }
                 })
                 .map(configResponse -> {
@@ -41,7 +41,7 @@ public class ApiConfigCloudDataStore implements ApiConfigDataStore {
                 }).doOnNext(new Consumer<List<ApiConfig>>() {
                     @Override
                     public void accept(List<ApiConfig> apiConfigs) throws Exception {
-                        Log.e("ON Next",String.valueOf(apiConfigs.size()));
+                        Log.e("ON Next", String.valueOf(apiConfigs.size()));
                     }
                 });
     }

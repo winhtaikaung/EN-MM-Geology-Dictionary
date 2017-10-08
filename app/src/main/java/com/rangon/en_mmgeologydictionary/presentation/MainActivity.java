@@ -1,7 +1,10 @@
 package com.rangon.en_mmgeologydictionary.presentation;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.TextView;
 
 import com.rangon.en_mmgeologydictionary.R;
 import com.rangon.en_mmgeologydictionary.data.cache.AppDataCacheImpl;
@@ -12,14 +15,23 @@ import com.rangon.en_mmgeologydictionary.data.repository.datasource.WordDataStor
 import com.rangon.en_mmgeologydictionary.data.service.WordDAL;
 import com.rangon.en_mmgeologydictionary.domain.executor.impl.ThreadExecutor;
 import com.rangon.en_mmgeologydictionary.model.Word;
+import com.rangon.en_mmgeologydictionary.presentation.base.BaseActivity;
 import com.rangon.en_mmgeologydictionary.presentation.presenters.MainScreenPresenter;
 import com.rangon.en_mmgeologydictionary.presentation.presenters.impl.MainScreenPresenterImpl;
+import com.rangon.en_mmgeologydictionary.presentation.ui.adapters.ViewPagerAdapter;
 import com.rangon.en_mmgeologydictionary.threading.MainThreadImpl;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements MainScreenPresenter.View {
+
+public class MainActivity extends BaseActivity implements MainScreenPresenter.View {
+    @BindView(R.id.pager)
+    ViewPager viewPager;
+    @BindView(R.id.tabs)
+    TabLayout tabLayout;
 
     private MainScreenPresenter mMainScreenPresenter;
     private WordDataStoreFactory mWordDataStoreFactory;
@@ -31,7 +43,9 @@ public class MainActivity extends AppCompatActivity implements MainScreenPresent
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+
+        ButterKnife.bind(this);
 
         mApiConfigDataStoreFactory = new ApiConfigDataStoreFactory();
         mWordDataStoreFactory = new WordDataStoreFactory(new AppDataCacheImpl(this));
@@ -41,9 +55,18 @@ public class MainActivity extends AppCompatActivity implements MainScreenPresent
 
         mMainScreenPresenter = new MainScreenPresenterImpl(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(),
                 this, mWordDataRepository, mApiConfigDataRepository);
-        if(!new AppDataCacheImpl(this).isCached()) {
+        if (!new AppDataCacheImpl(this).isCached()) {
             mMainScreenPresenter.loadInitialData(1, 100);
         }
+
+        mMainScreenPresenter.init();
+
+
+    }
+
+    @Override
+    protected int getLayoutResource() {
+        return R.layout.activity_main;
     }
 
     @Override
@@ -53,6 +76,31 @@ public class MainActivity extends AppCompatActivity implements MainScreenPresent
 
     @Override
     public void onWordListLoaded(List<Word> wordList) {
+
+    }
+
+    @Override
+    public void onInit() {
+        String[] titles = {"Search", "Bookmarks", "Settings"};
+        int[] tabIcons = {
+                R.drawable.ic_action_search,
+                R.drawable.ic_action_bookmark,
+                R.drawable.ic_action_setting
+        };
+
+        ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), titles);
+        viewPager.setAdapter(pagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+
+        for (int i = 0; i < tabIcons.length; i++) {
+            View iconView = getLayoutInflater().inflate(R.layout.custom_tab, null);
+            iconView.findViewById(R.id.icon).setBackgroundResource(tabIcons[i]);
+            tabLayout.getTabAt(i).setCustomView(iconView);
+            TextView tvTab = (TextView) tabLayout.getTabAt(i).getCustomView().findViewById(R.id.tvTab);
+            tvTab.setText(titles[i]);
+        }
+
+        viewPager.setCurrentItem(0);
 
     }
 

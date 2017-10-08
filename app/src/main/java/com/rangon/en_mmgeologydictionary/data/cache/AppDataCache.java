@@ -7,5 +7,6 @@ package com.rangon.en_mmgeologydictionary.data.cache;
 public interface AppDataCache {
 
     boolean isCached();
+
     void setCached();
 }

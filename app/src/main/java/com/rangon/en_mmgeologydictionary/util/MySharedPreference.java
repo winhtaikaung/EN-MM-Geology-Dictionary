@@ -1,29 +1,28 @@
-package com.rangon.en_mmgeologydictionary.data.sharedPref;
+package com.rangon.en_mmgeologydictionary.util;
+
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 /**
- * Created by winhtaikaung on 19/9/17.
+ * Created by winhtaikaung on 9/10/17.
  */
-
-public class MySharedPref {
-
-    private static MySharedPref mySharedPreference;
+public class MySharedPreference {
+    private static MySharedPreference mySharedPreference;
     protected SharedPreferences mSharedPreferences;
     protected SharedPreferences.Editor mEditor;
     protected Context mcontext;
 
-    public MySharedPref(Context context) {
+    public MySharedPreference(Context context) {
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         mEditor = mSharedPreferences.edit();
         this.mcontext = context;
     }
 
-    public static synchronized MySharedPref getInstance(Context context) {
+    public static synchronized MySharedPreference getInstance(Context context) {
         if (mySharedPreference == null) {
-            mySharedPreference = new MySharedPref(context);
+            mySharedPreference = new MySharedPreference(context);
         }
         return mySharedPreference;
     }

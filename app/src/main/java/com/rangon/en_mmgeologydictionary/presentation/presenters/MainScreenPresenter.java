@@ -15,10 +15,14 @@ public interface MainScreenPresenter {
 
     void loadWordList(int page, int limit);
 
+    void init();
+
     interface View extends BaseView {
         void onLoadInitialData(boolean isLoaded);
 
         void onWordListLoaded(List<Word> wordList);
+
+        void onInit();
 
 
     }

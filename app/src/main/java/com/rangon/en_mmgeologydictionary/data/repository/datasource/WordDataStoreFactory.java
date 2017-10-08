@@ -17,9 +17,9 @@ public class WordDataStoreFactory {
 
     public WordsDataStore create(WordDAL wordDAL) {
         if (appDataCache.isCached()) {
-            return new WordsLocalDataStore(wordDAL,appDataCache);
+            return new WordsLocalDataStore(wordDAL, appDataCache);
         } else {
-            return new WordsCloudDataStore(wordDAL,appDataCache);
+            return new WordsCloudDataStore(wordDAL, appDataCache);
         }
     }
 }

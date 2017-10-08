@@ -10,21 +10,22 @@ import com.rangon.en_mmgeologydictionary.data.sharedPref.MySharedPref;
 
 public class AppDataCacheImpl implements AppDataCache {
 
-    private final String IS_CACHED ="IS_CACHED";
+    private final String IS_CACHED = "IS_CACHED";
 
     private Context mContext;
-    public AppDataCacheImpl(Context context){
-        this.mContext= context;
+
+    public AppDataCacheImpl(Context context) {
+        this.mContext = context;
     }
 
     @Override
     public boolean isCached() {
-        return MySharedPref.getInstance(mContext).getBooleanPreference(IS_CACHED,false);
+        return MySharedPref.getInstance(mContext).getBooleanPreference(IS_CACHED, false);
 
     }
 
     @Override
     public void setCached() {
-        MySharedPref.getInstance(mContext).setBooleanPreference(IS_CACHED,true);
+        MySharedPref.getInstance(mContext).setBooleanPreference(IS_CACHED, true);
     }
 }

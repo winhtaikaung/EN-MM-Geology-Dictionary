@@ -49,6 +49,11 @@ public class MainScreenPresenterImpl extends AbstractPresenter implements MainSc
     }
 
     @Override
+    public void init() {
+        mView.onInit();
+    }
+
+    @Override
     public void onWordListRetrieved(Observable<List<Word>> wordListObservable) {
 
         wordListObservable.doOnError(throwable -> {
@@ -63,7 +68,7 @@ public class MainScreenPresenterImpl extends AbstractPresenter implements MainSc
                 .subscribe(apiConfigs -> {
                     for (ApiConfig config : apiConfigs) {
                         for (int i = 0; i <= config.getPageCount(); i++) {
-                            Log.e("PAGE-->",String.valueOf(i));
+                            Log.e("PAGE-->", String.valueOf(i));
                             GetWordListInteractor getWordListInteractor = new GetWordListInteractorImpl(mExecutor,
                                     mMainThread,
                                     mWordRepository, config.getWordIndex(), i, 100, MainScreenPresenterImpl.this);
