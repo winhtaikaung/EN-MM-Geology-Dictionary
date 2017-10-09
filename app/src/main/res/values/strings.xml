@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">EN-MM Geology Dictionary</string>
+    <string name="search_place_holder">Enter word to search</string>
 </resources>

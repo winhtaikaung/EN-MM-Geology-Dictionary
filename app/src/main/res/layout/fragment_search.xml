@@ -3,12 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="@dimen/collapsingtoolbar_expanded_title_margin_bottom">
+    android:paddingTop="@dimen/spacing_minor"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin">
 
-    <android.support.v7.widget.AppCompatAutoCompleteTextView
+    <android.support.v7.widget.AppCompatEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="top"
+        android:hint="@string/search_place_holder"
         android:background="@drawable/grey_rectangle_rounded_large"
         android:drawableRight="@drawable/ic_action_search" />
 </FrameLayout>
