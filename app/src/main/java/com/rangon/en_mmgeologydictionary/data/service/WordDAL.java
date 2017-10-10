@@ -27,7 +27,7 @@ public class WordDAL {
     public List<Word> getLikelyWords(String o) {
         DBHelper db = new DBHelper(mContext);
         String tableName = indexingUtil.gettableName(o.charAt(0));
-        String sql = "SELECT word,meaning_zg,type,is_fav FROM " + tableName + " WHERE word LIKE '" + o + "%'";
+        String sql = "SELECT word,meaning_zg,meaning_uni,type,is_fav FROM " + tableName + " WHERE word LIKE '" + o + "%' LIMIT 10";
         Log.i("after query", "after query");
         ArrayList<HashMap<String, String>> alist = null;
         List<Word> wordlist = new ArrayList<>();
@@ -67,7 +67,7 @@ public class WordDAL {
         DBHelper db = new DBHelper(mContext);
         ArrayList<String> insertQueries = new ArrayList<>();
         for (Word o : listword) {
-            String sql = "INSERT INTO " + tableName + " (id,word,type,meaning_zg,meaning_uni) values ('" + UUID.randomUUID().toString() + "','" + o.getWord().toLowerCase().replace("'", "''") + "','" + o.getType() + "','" + o.getMeaningZg().replace("'", "''") + "','" + o.getMeaningUni().replace("'", "''") + "');";
+            String sql = "INSERT INTO " + tableName + " (id,word,type,meaning_zg,meaning_uni,is_fav) values ('" + UUID.randomUUID().toString() + "','" + o.getWord().toLowerCase().replace("'", "''") + "','" + o.getType() + "','" + o.getMeaningZg().replace("'", "''") + "','" + o.getMeaningUni().replace("'", "''") + "','" + 0 + "');";
             insertQueries.add(sql);
         }
         try {

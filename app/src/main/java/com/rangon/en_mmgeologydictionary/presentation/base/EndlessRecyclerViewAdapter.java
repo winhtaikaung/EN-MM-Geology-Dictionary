@@ -1,8 +1,6 @@
-package com.rangon.en_mmgeologydictionary.presentation.ui.base;
-
+package com.rangon.en_mmgeologydictionary.presentation.base;
 
 import android.content.Context;
-import android.graphics.PorterDuff;
 import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,7 +46,7 @@ public class EndlessRecyclerViewAdapter extends RecyclerViewAdapterWrapper {
     }
 
     /**
-     * Let the adapter know that com.rangon.en_mmgeologydictionary.data is load and ready to view.
+     * Let the adapter know that data is load and ready to view.
      *
      * @param keepOnAppending whether the adapter should request to load more when scrolling to the
      *                        bottom.
@@ -98,11 +96,9 @@ public class EndlessRecyclerViewAdapter extends RecyclerViewAdapterWrapper {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        if (getItemViewType(position) == TYPE_PENDING) {
-            if (!dataPending.get()) {
-                dataPending.set(true);
-                requestToLoadMoreListener.onLoadMoreRequested();
-            }
+        if (getItemViewType(position) == TYPE_PENDING && !dataPending.get()) {
+            dataPending.set(true);
+            requestToLoadMoreListener.onLoadMoreRequested();
         } else {
             super.onBindViewHolder(holder, position);
         }
@@ -110,19 +106,18 @@ public class EndlessRecyclerViewAdapter extends RecyclerViewAdapterWrapper {
 
     public interface RequestToLoadMoreListener {
         /**
-         * The adapter requests to load more com.rangon.en_mmgeologydictionary.data.
+         * The adapter requests to load more data.
          */
         void onLoadMoreRequested();
     }
 
-    public class PendingViewHolder extends ViewHolder {
+    class PendingViewHolder extends ViewHolder {
 
         public PendingViewHolder(View itemView) {
             super(itemView);
-            ((ProgressBar) itemView).getIndeterminateDrawable()
-                    .setColorFilter(context.getResources().getColor(R.color.colorPrimary),
-                            PorterDuff.Mode.SRC_ATOP);
+            ((ProgressBar) itemView).setProgressDrawable(context.getResources().getDrawable(R.drawable.progress_drawable));
+//                    .setColorFilter(context.getResources().getColor(R.color.colorPrimary),
+//                            PorterDuff.Mode.SRC_ATOP);
         }
     }
 }
-

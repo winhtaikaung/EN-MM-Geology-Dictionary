@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -8,10 +8,16 @@
     android:paddingRight="@dimen/activity_horizontal_margin">
 
     <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/tvSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="top"
+        android:layout_gravity="top|center"
         android:hint="@string/search_place_holder"
         android:background="@drawable/grey_rectangle_rounded_large"
         android:drawableRight="@drawable/ic_action_search" />
-</FrameLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_word_list"
+        android:layout_marginTop="@dimen/spacing_major"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>
