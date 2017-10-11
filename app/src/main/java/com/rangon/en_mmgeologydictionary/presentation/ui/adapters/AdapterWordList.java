@@ -27,7 +27,7 @@ public class AdapterWordList extends BaseAdapter<BaseAdapter.BaseViewHolder> {
     Context mContext;
     List<Word> mWordList;
 
-    public AdapterWordList()
+    public AdapterWordList(){
         mWordList = new ArrayList<>();
     }
 
@@ -63,7 +63,7 @@ public class AdapterWordList extends BaseAdapter<BaseAdapter.BaseViewHolder> {
         return mWordList != null ? mWordList.size() : 0;
     }
 
-    class WordListViewHolder extends BaseViewHolder {
+    class WordListViewHolder extends BaseAdapter.BaseViewHolder {
 
         @BindView(R.id.tv_word)
         TextView tvWord;
