@@ -27,7 +27,7 @@ public class WordDAL {
     public List<Word> getLikelyWords(String o) {
         DBHelper db = new DBHelper(mContext);
         String tableName = indexingUtil.gettableName(o.charAt(0));
-        String sql = "SELECT word,meaning_zg,meaning_uni,type,is_fav FROM " + tableName + " WHERE word LIKE '" + o + "%' LIMIT 10";
+        String sql = "SELECT DISTINCT word,meaning_zg,meaning_uni,type,is_fav FROM " + tableName + " WHERE word LIKE '" + o + "%' LIMIT 10";
         Log.i("after query", "after query");
         ArrayList<HashMap<String, String>> alist = null;
         List<Word> wordlist = new ArrayList<>();

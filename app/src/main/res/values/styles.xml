@@ -34,6 +34,16 @@
         <item name="android:textSize">@dimen/text_size_medium_extra</item>
     </style>
 
+    <style name="TV_DEFAULT_NORMAL" parent="android:Widget.TextView">
+
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_small_extra</item>
+        <item name="android:paddingLeft">@dimen/default_padding_medium</item>
+        <item name="android:paddingRight">@dimen/default_padding_medium</item>
+        <item name="android:paddingTop">@dimen/default_padding_small</item>
+        <item name="android:paddingBottom">@dimen/default_padding_small</item>
+    </style>
+
     <style name="TV_DEFAULT_LARGE" parent="android:Widget.TextView">
 
         <item name="fontPath">fonts/maven-pro-regular.ttf</item>
@@ -43,7 +53,10 @@
     <style name="TV_DEFAULT_LARGE_BOLD" parent="android:Widget.TextView">
         <item name="android:textColor">@color/black</item>
         <item name="fontPath">fonts/maven-pro-bold.ttf</item>
-        <item name="android:padding">@dimen/default_padding_large</item>
+        <item name="android:paddingTop">@dimen/default_padding_medium</item>
+        <item name="android:paddingLeft">@dimen/default_padding_medium</item>
+        <item name="android:paddingRight">@dimen/default_padding_medium</item>
+        <item name="android:paddingBottom">@dimen/default_padding_small</item>
         <item name="android:textSize">@dimen/text_size_medium_extra</item>
     </style>
 

@@ -16,7 +16,7 @@ public interface SearchScreenPresenter {
 
     void loadLikelyWordList(String searchText);
 
-    interface  View extends BaseView{
+    interface View extends BaseView {
         void onLoadInitialData();
 
         void onLikelyWordListLoaded(List<Word> wordList);

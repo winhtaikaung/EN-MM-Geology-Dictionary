@@ -4,11 +4,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.rangon.en_mmgeologydictionary.R;
@@ -20,6 +23,7 @@ import com.rangon.en_mmgeologydictionary.domain.executor.impl.ThreadExecutor;
 import com.rangon.en_mmgeologydictionary.model.Word;
 import com.rangon.en_mmgeologydictionary.presentation.presenters.SearchScreenPresenter;
 import com.rangon.en_mmgeologydictionary.presentation.presenters.impl.SearchScreenPresenterImpl;
+import com.rangon.en_mmgeologydictionary.presentation.ui.adapters.AdapterWordList;
 import com.rangon.en_mmgeologydictionary.threading.MainThreadImpl;
 
 import java.util.List;
@@ -43,10 +47,17 @@ public class SearchFragment extends Fragment implements SearchScreenPresenter.Vi
     @BindView(R.id.tvSearch)
     AppCompatEditText mTvSearchEditText;
 
+    @BindView(R.id.list_layout)
+    LinearLayout mListLayout;
+
+    @BindView(R.id.tvError)
+    TextView tvErrorText;
+
     private SearchScreenPresenter mSearchScreenPresenter;
     private WordDataStoreFactory mWordDataStoreFactory;
     private WordsDataRepository mWordsDataRepository;
 
+    private AdapterWordList mWordListAdapter;
 
 
     @Nullable
@@ -56,9 +67,9 @@ public class SearchFragment extends Fragment implements SearchScreenPresenter.Vi
         ButterKnife.bind(this, v);
 
         mWordDataStoreFactory = new WordDataStoreFactory(new AppDataCacheImpl(this.getContext()));
-        mWordsDataRepository = new WordsDataRepository(mWordDataStoreFactory,new WordDAL(this.getContext()));
+        mWordsDataRepository = new WordsDataRepository(mWordDataStoreFactory, new WordDAL(this.getContext()));
         mSearchScreenPresenter = new SearchScreenPresenterImpl(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(),
-                this,mWordsDataRepository);
+                this, mWordsDataRepository);
         mSearchScreenPresenter.loadInitialData();
         return v;
     }
@@ -66,6 +77,11 @@ public class SearchFragment extends Fragment implements SearchScreenPresenter.Vi
 
     @Override
     public void onLoadInitialData() {
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
+        mWordListAdapter = new AdapterWordList();
+        mRvWordListView.setLayoutManager(mLayoutManager);
+        mRvWordListView.setAdapter(mWordListAdapter);
+
         Disposable ovTvSearch = RxTextView.textChanges(mTvSearchEditText)
                 .skip(1)
                 .map(new Function<CharSequence, String>() {
@@ -94,18 +110,24 @@ public class SearchFragment extends Fragment implements SearchScreenPresenter.Vi
 
     @Override
     public void showError(String message) {
-
+        mListLayout.setVisibility(View.GONE);
+        tvErrorText.setVisibility(View.VISIBLE);
+        tvErrorText.setText(message);
     }
 
     @Override
     public void hideError(String message) {
+        mListLayout.setVisibility(View.VISIBLE);
+        tvErrorText.setVisibility(View.GONE);
 
     }
 
 
     @Override
     public void onLikelyWordListLoaded(List<Word> wordList) {
-        Log.e("SEARCH_TEXT_COUNT",String.valueOf(wordList.size()));
+        Log.e("SEARCH_TEXT_COUNT", String.valueOf(wordList.size()));
+        mWordListAdapter.setWordList(wordList);
+
     }
 
     @Override

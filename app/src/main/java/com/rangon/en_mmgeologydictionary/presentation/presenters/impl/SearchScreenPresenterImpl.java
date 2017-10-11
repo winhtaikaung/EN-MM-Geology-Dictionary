@@ -55,7 +55,12 @@ public class SearchScreenPresenterImpl extends AbstractPresenter implements Sear
         }).subscribe(new Consumer<List<Word>>() {
             @Override
             public void accept(List<Word> wordList) throws Exception {
-                mView.onLikelyWordListLoaded(wordList);
+                if (wordList.size() == 0) {
+                    mView.showError("No words Found");
+                } else {
+                    mView.hideError("");
+                    mView.onLikelyWordListLoaded(wordList);
+                }
             }
         });
     }

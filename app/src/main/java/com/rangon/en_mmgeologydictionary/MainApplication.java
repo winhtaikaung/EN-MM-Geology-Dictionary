@@ -15,7 +15,7 @@ public class MainApplication extends Application {
     public void onCreate() {
         super.onCreate();
         AppDataCache cache = new AppDataCacheImpl(this);
-        if(!cache.isCached()) {
+        if (!cache.isCached()) {
             DBHelper dbHelper = new DBHelper(this);
             dbHelper.MakeDB();
         }
