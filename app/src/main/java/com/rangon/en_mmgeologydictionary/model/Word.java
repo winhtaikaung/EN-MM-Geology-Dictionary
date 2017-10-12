@@ -3,8 +3,6 @@ package com.rangon.en_mmgeologydictionary.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import org.rabbitconverter.rabbit.Rabbit;
-
 /**
  * Created by winhtaikaung on 17/7/17.
  */
@@ -76,11 +74,11 @@ public class Word {
     }
 
     public String getMeaningUni() {
-        return Rabbit.zg2uni(meaningUni);
+        return meaningUni;
     }
 
     public void setMeaningUni(String meaningUni) {
-        this.meaningUni = Rabbit.zg2uni(meaningUni);
+        this.meaningUni = meaningUni;
     }
 
     public char getCharacter() {
