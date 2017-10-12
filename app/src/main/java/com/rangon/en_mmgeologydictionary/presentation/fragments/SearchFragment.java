@@ -10,8 +10,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.rangon.en_mmgeologydictionary.R;
@@ -39,7 +41,7 @@ import io.reactivex.functions.Function;
  * Created by winhtaikaung on 8/10/17.
  */
 
-public class SearchFragment extends Fragment implements SearchScreenPresenter.View {
+public class SearchFragment extends Fragment implements SearchScreenPresenter.View,AdapterView.OnItemClickListener {
 
     @BindView(R.id.rv_word_list)
     RecyclerView mRvWordListView;
@@ -79,6 +81,7 @@ public class SearchFragment extends Fragment implements SearchScreenPresenter.Vi
     public void onLoadInitialData() {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
         mWordListAdapter = new AdapterWordList();
+        mWordListAdapter.setOnItemClickListener(this);
         mRvWordListView.setLayoutManager(mLayoutManager);
         mRvWordListView.setAdapter(mWordListAdapter);
 
@@ -133,5 +136,10 @@ public class SearchFragment extends Fragment implements SearchScreenPresenter.Vi
     @Override
     public void onSearchTextReceived(String searchText) {
         mSearchScreenPresenter.loadLikelyWordList(searchText);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Toast.makeText(this.getContext(),"NextActivity",Toast.LENGTH_SHORT).show();
     }
 }
