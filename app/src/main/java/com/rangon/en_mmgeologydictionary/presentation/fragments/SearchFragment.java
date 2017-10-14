@@ -1,5 +1,6 @@
 package com.rangon.en_mmgeologydictionary.presentation.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.rangon.en_mmgeologydictionary.R;
@@ -25,6 +25,7 @@ import com.rangon.en_mmgeologydictionary.domain.executor.impl.ThreadExecutor;
 import com.rangon.en_mmgeologydictionary.model.Word;
 import com.rangon.en_mmgeologydictionary.presentation.presenters.SearchScreenPresenter;
 import com.rangon.en_mmgeologydictionary.presentation.presenters.impl.SearchScreenPresenterImpl;
+import com.rangon.en_mmgeologydictionary.presentation.ui.activities.WordDetailActivity;
 import com.rangon.en_mmgeologydictionary.presentation.ui.adapters.AdapterWordList;
 import com.rangon.en_mmgeologydictionary.threading.MainThreadImpl;
 
@@ -140,6 +141,16 @@ public class SearchFragment extends Fragment implements SearchScreenPresenter.Vi
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        Toast.makeText(this.getContext(),"NextActivity",Toast.LENGTH_SHORT).show();
+        TextView tvword =(TextView) view.findViewById(R.id.tv_word);
+        if(tvword!= null){
+
+            Log.e("UUID+WORD",tvword.getTag().toString()+"--"+tvword.getText());
+            Intent intent = new Intent(this.getActivity(), WordDetailActivity.class);
+            startActivity(intent);
+        }else{
+            //TODO invalid data state handling
+            this.showError("Invalid Data please go to setting again");
+        }
+
     }
 }

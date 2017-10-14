@@ -50,7 +50,7 @@ public class AdapterWordList extends BaseAdapter<BaseAdapter.BaseViewHolder> {
             if (vh != null) {
                 if (mWordList.get(position) != null) {
                     Word wordItem = mWordList.get(position);
-
+                    vh.tvWord.setTag(wordItem.getId());
                     vh.tvWord.setText(wordItem.getWord());
                     vh.tvDefinition.setText(wordItem.getMeaningUni());
                 }

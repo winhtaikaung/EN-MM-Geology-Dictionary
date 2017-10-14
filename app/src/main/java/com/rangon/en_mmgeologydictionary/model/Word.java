@@ -1,5 +1,7 @@
 package com.rangon.en_mmgeologydictionary.model;
 
+import android.util.Log;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -8,6 +10,9 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class Word {
+
+    private String id;
+
     @SerializedName("word")
     @Expose
     private String word;
@@ -107,6 +112,15 @@ public class Word {
 
     @Override
     public String toString() {
-        return word + type + meaningZg + remark;
+        Log.e("WORD_MODEL",id +"-"+word + type + meaningZg + remark);
+        return id +"-"+word + type + meaningZg + remark;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

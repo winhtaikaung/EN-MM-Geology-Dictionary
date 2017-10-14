@@ -9,7 +9,7 @@ import com.rangon.en_mmgeologydictionary.presentation.view.BaseView;
 
 public interface WordDetailPresenter extends BaseView {
 
-    void getWordDetail(String word);
+    void getWordDetail(String word,String id);
 
     interface View extends BaseView {
         void onWordRetrieved(Word word);

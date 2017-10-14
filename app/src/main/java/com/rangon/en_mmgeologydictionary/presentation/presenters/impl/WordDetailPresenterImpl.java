@@ -27,8 +27,8 @@ public class WordDetailPresenterImpl extends AbstractPresenter implements WordDe
     }
 
     @Override
-    public void getWordDetail(String word) {
-        GetWordInteractor getWordInteractor = new GetWordInteractorImpl(mExecutor, mMainThread, mWordRepository, word, this);
+    public void getWordDetail(String word,String id) {
+        GetWordInteractor getWordInteractor = new GetWordInteractorImpl(mExecutor, mMainThread, mWordRepository, word,id, this);
         getWordInteractor.execute();
     }
 
