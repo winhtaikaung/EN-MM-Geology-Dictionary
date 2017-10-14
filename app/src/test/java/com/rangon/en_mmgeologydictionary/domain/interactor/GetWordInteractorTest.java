@@ -49,12 +49,12 @@ public class GetWordInteractorTest {
 
         Observable<Word> dummyWordModel = Observable.just(dummyWordfirst);
 
-        when(mWordRepository.getWord("test","d427beaa-ca5c-485d-bb76-ab086dea8f9f"))
+        when(mWordRepository.getWord("test", "d427beaa-ca5c-485d-bb76-ab086dea8f9f"))
                 .thenReturn(dummyWordModel);
 
-        GetWordInteractorImpl interactor = new GetWordInteractorImpl(mExecutor, mMainThread, mWordRepository, "test","d427beaa-ca5c-485d-bb76-ab086dea8f9f", mMockedCallback);
+        GetWordInteractorImpl interactor = new GetWordInteractorImpl(mExecutor, mMainThread, mWordRepository, "test", "d427beaa-ca5c-485d-bb76-ab086dea8f9f", mMockedCallback);
         interactor.run();
-        Mockito.verify(mWordRepository).getWord("test","d427beaa-ca5c-485d-bb76-ab086dea8f9f");
+        Mockito.verify(mWordRepository).getWord("test", "d427beaa-ca5c-485d-bb76-ab086dea8f9f");
         Mockito.verifyNoMoreInteractions(mWordRepository);
         Mockito.verify(mMockedCallback).onWordRetrieved(dummyWordModel);
 

@@ -42,7 +42,7 @@ import io.reactivex.functions.Function;
  * Created by winhtaikaung on 8/10/17.
  */
 
-public class SearchFragment extends Fragment implements SearchScreenPresenter.View,AdapterView.OnItemClickListener {
+public class SearchFragment extends Fragment implements SearchScreenPresenter.View, AdapterView.OnItemClickListener {
 
     @BindView(R.id.rv_word_list)
     RecyclerView mRvWordListView;
@@ -141,13 +141,15 @@ public class SearchFragment extends Fragment implements SearchScreenPresenter.Vi
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        TextView tvword =(TextView) view.findViewById(R.id.tv_word);
-        if(tvword!= null){
+        TextView tvword = (TextView) view.findViewById(R.id.tv_word);
+        if (tvword != null) {
 
-            Log.e("UUID+WORD",tvword.getTag().toString()+"--"+tvword.getText());
+            Log.e("UUID+WORD", tvword.getTag().toString() + "--" + tvword.getText());
             Intent intent = new Intent(this.getActivity(), WordDetailActivity.class);
+            intent.putExtra("id", tvword.getTag().toString());
+            intent.putExtra("word", tvword.getText().toString());
             startActivity(intent);
-        }else{
+        } else {
             //TODO invalid data state handling
             this.showError("Invalid Data please go to setting again");
         }

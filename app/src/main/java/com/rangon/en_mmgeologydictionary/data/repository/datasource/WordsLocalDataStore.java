@@ -24,8 +24,8 @@ public class WordsLocalDataStore implements WordsDataStore {
 
 
     @Override
-    public Observable<Word> getWord(String word,String id) {
-        return Observable.just(mWordDal.getByWord(word,id));
+    public Observable<Word> getWord(String word, String id) {
+        return Observable.just(mWordDal.getByWord(word, id));
     }
 
     @Override

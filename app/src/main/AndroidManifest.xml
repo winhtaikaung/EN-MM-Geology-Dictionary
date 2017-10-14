@@ -18,7 +18,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.rangon.en_mmgeologydictionary.presentation.ui.activities.WordDetailActivity"></activity>
+        <activity
+            android:name="com.rangon.en_mmgeologydictionary.presentation.ui.activities.WordDetailActivity"
+            android:parentActivityName=".presentation.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".presentation.MainActivity" />
+
+        </activity>
     </application>
 
 </manifest>

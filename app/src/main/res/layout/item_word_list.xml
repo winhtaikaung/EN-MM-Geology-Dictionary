@@ -14,7 +14,7 @@
     <TextView
         android:id="@+id/tv_definition"
         style="@style/TV_DEFAULT_NORMAL"
-        fontPath="fonts/NamKhoneUnicode_v2.0.ttf"
+        fontPath="fonts/ZawDecode-2.0_Regular_pyi_daung_su.ttf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"

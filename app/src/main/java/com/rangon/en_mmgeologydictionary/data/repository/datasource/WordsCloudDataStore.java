@@ -29,7 +29,7 @@ public class WordsCloudDataStore implements WordsDataStore {
     }
 
     @Override
-    public Observable<Word> getWord(String word,String id) {
+    public Observable<Word> getWord(String word, String id) {
         return null;
     }
 

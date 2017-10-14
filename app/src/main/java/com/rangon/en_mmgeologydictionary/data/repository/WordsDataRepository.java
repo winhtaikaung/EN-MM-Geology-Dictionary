@@ -31,7 +31,7 @@ public class WordsDataRepository implements WordRepository {
      * @return
      */
     @Override
-    public Observable<Word> getWord(String word,String id) {
+    public Observable<Word> getWord(String word, String id) {
         return mWordDataStoreFactory.create(mWordDal).getWord(word, id).map(word1 -> word1);
     }
 

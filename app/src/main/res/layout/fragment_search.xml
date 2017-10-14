@@ -12,10 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top|center"
         android:background="@drawable/grey_rectangle_rounded_large"
-        android:drawableRight="@drawable/ic_action_search"
+        android:drawableLeft="@drawable/ic_action_search"
         android:hint="@string/search_place_holder"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
 
+        android:maxLines="1"
         android:paddingRight="@dimen/activity_horizontal_margin" />
 
     <TextView

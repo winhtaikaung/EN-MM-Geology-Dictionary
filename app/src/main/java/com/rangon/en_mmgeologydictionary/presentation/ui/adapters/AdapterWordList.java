@@ -27,7 +27,7 @@ public class AdapterWordList extends BaseAdapter<BaseAdapter.BaseViewHolder> {
     Context mContext;
     List<Word> mWordList;
 
-    public AdapterWordList(){
+    public AdapterWordList() {
         mWordList = new ArrayList<>();
     }
 

@@ -11,7 +11,7 @@ import io.reactivex.Observable;
  */
 
 public interface WordsDataStore {
-    Observable<Word> getWord(String word,String id);
+    Observable<Word> getWord(String word, String id);
 
     Observable<List<Word>> getLikelyWord(String searchKeyword);
 
