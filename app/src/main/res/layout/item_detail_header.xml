@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_word"
+        style="@style/TV_DEFAULT_XTRA_LARGE_BOLD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Awesome" />
+
+    <TextView
+        android:id="@+id/tv_word_type"
+        style="@style/TV_DETAIL_HEADER_WORD_TYPE"
+
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Adjective" />
+
+
+</LinearLayout>

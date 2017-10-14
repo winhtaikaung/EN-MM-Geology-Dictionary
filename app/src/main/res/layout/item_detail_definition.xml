@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/default_padding_large"
+    android:paddingLeft="@dimen/default_padding_large"
+    android:paddingRight="@dimen/default_padding_large"
+    android:paddingTop="@dimen/default_padding_large">
+
+    <TextView
+        style="@style/TV_DEFAULT_LARGE_BOLD"
+        fontPath="fonts/ZawDecode-2.0_Regular_pyi_daung_su.ttf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="အဓိပ္ပာယ်ဖွင့်ဆိုချက်" />
+
+    <TextView
+        android:id="@+id/tv_definition"
+        style="@style/TV_DEFAULT_NORMAL"
+        fontPath="fonts/ZawDecode-2.0_Regular_pyi_daung_su.ttf"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/imageview_in_list_height_240"
+        android:background="@drawable/card_bg"
+        android:scrollbars="horizontal"
+        android:text="@string/place_holder" />
+</LinearLayout>

@@ -25,6 +25,8 @@
     <!--Random Color-->
     <item name="blue" type="color">#FF33B5E5</item>
     <item name="black" type="color">#000000</item>
+    <item name="grey" type="color">#767575</item>
+    <item name="white" type="color">#FFFFFF</item>
     <item name="purple" type="color">#FFAA66CC</item>
     <item name="green" type="color">#FF99CC00</item>
     <item name="orange" type="color">#FFFFBB33</item>
@@ -34,6 +36,11 @@
     <item name="darkgreen" type="color">#FF669900</item>
     <item name="darkorange" type="color">#FFFF8800</item>
     <item name="darkred" type="color">#FFCC0000</item>
+
+    <!--Transparent-->
+    <item name="transparent_black" type="color">#78000000</item>
+    <item name="transparent" type="color">#00000000</item>
+    <item name="transparent_grey" type="color">#8a9c9c9c</item>
 
     <integer-array name="androidcolors">
         <item>@color/blue</item>

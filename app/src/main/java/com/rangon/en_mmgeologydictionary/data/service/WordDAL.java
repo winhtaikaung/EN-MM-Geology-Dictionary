@@ -27,7 +27,7 @@ public class WordDAL {
     public List<Word> getLikelyWords(String o) {
         DBHelper db = new DBHelper(mContext);
         String tableName = indexingUtil.gettableName(o.charAt(0));
-        String sql = "SELECT DISTINCT word,meaning_zg,meaning_uni,type,is_fav FROM " + tableName + " WHERE word LIKE '" + o + "%' LIMIT 10";
+        String sql = "SELECT DISTINCT id,word,meaning_zg,meaning_uni,type,is_fav FROM " + tableName + " WHERE word LIKE '" + o + "%' LIMIT 10";
         Log.i("after query", "after query");
         ArrayList<HashMap<String, String>> alist = null;
         List<Word> wordlist = new ArrayList<>();
@@ -38,6 +38,7 @@ public class WordDAL {
             for (int i = 0; i < alist.size(); i++) {
                 HashMap tableRow = (HashMap) alist.get(i);
                 Word w = new Word();
+                w.setId(tableRow.get("id").toString());
                 w.setWord(tableRow.get("word").toString().replace("''", "'").toLowerCase());
                 w.setMeaningZg(tableRow.get("meaning_zg").toString().replace("''", "'"));
                 w.setMeaningUni(tableRow.get("meaning_uni").toString().replace("''", "'"));
@@ -91,17 +92,18 @@ public class WordDAL {
         }
     }
 
-    public Word getByWord(String inputWord) {
+    public Word getByWord(String inputWord, String id) {
         Character firstCharacter;
         ArrayList aList;
         DBHelper db = new DBHelper(mContext);
         firstCharacter = inputWord.charAt(0);
         String TableName = indexingUtil.gettableName(firstCharacter);
-        String sql = "SELECT * FROM " + TableName.toLowerCase() + " where word = '" + inputWord + "'";
+        String sql = "SELECT * FROM " + TableName.toLowerCase() + " where word = '" + inputWord + "'AND id = '" + id + "'";
         aList = db.getDataRow(sql);
         HashMap tableRow = (HashMap) aList.get(0);
         Word w = new Word();
         if (tableRow.size() != 0) {
+            w.setId(tableRow.get("id").toString());
             w.setWord(tableRow.get("word").toString().replace("''", "'").toLowerCase());
             w.setMeaningZg(tableRow.get("meaning_zg").toString().replace("''", "'"));
             w.setMeaningUni(tableRow.get("meaning_uni").toString().replace("''", "'"));

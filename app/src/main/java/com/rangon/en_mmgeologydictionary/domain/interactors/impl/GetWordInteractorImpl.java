@@ -17,18 +17,20 @@ public class GetWordInteractorImpl extends AbstractInteractor implements GetWord
     private WordRepository mRepository;
     private Callback mCallback;
     private String mWord;
+    private String mWordId;
 
-    public GetWordInteractorImpl(Executor threadExecutor, MainThread mainThread, WordRepository wordRepository, String word, Callback callback) {
+    public GetWordInteractorImpl(Executor threadExecutor, MainThread mainThread, WordRepository wordRepository, String word, String id, Callback callback) {
         super(threadExecutor, mainThread);
         mRepository = wordRepository;
         mCallback = callback;
         this.mWord = word;
+        this.mWordId = id;
 
     }
 
     @Override
     public void run() {
-        final Observable<Word> wordObservable = mRepository.getWord(mWord);
+        final Observable<Word> wordObservable = mRepository.getWord(mWord, mWordId);
         mMainThread.post(() -> {
             mCallback.onWordRetrieved(wordObservable);
         });
