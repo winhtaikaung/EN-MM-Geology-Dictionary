@@ -184,7 +184,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public void bulkInsert(ArrayList<String> arrSql) throws SQLiteException {
+
+
+    public void executeBulkQueries(ArrayList<String> arrSql) throws SQLiteException {
         SQLiteDatabase database = this.getWritableDatabase();
         try {
             for (String sql : arrSql) {

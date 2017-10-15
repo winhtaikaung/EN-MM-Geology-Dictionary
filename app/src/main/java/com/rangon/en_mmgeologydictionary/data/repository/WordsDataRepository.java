@@ -44,6 +44,11 @@ public class WordsDataRepository implements WordRepository {
         return mWordDataStoreFactory.create(mWordDal).getLikelyWord(searchKeyword).map(words -> words);
     }
 
+    @Override
+    public Observable<Boolean> deleteWordTables(String[] tableName) {
+        return mWordDataStoreFactory.create(mWordDal).deleteWordTables(tableName).map(aBoolean -> aBoolean);
+    }
+
     /**
      * @param page
      * @param size

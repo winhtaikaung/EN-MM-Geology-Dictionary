@@ -34,6 +34,11 @@ public class WordsLocalDataStore implements WordsDataStore {
     }
 
     @Override
+    public Observable<Boolean> deleteWordTables(String[] tableNames) {
+        return Observable.just(mWordDal.deleteWordTable(tableNames));
+    }
+
+    @Override
     public Observable<List<Word>> getWordList(String wordIndex, int page, int size) {
         // TODO fetch wordlist locally
         return Observable.just(new ArrayList<Word>());

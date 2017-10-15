@@ -39,6 +39,11 @@ public class WordsCloudDataStore implements WordsDataStore {
     }
 
     @Override
+    public Observable<Boolean> deleteWordTables(String[] tableNames) {
+        return null;
+    }
+
+    @Override
     public Observable<List<Word>> getWordList(String wordIndex, int page, int size) {
         if (wordIndex.equalsIgnoreCase("last")) {
             mCache.setCached();

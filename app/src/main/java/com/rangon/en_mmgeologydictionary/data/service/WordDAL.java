@@ -72,20 +72,37 @@ public class WordDAL {
             insertQueries.add(sql);
         }
         try {
-            db.bulkInsert(insertQueries);
+            db.executeBulkQueries(insertQueries);
             return true;
         } catch (Exception ex) {
             return false;
         }
     }
 
-    public boolean DeleteWord(Word o, String TableName) {
+    public boolean deleteWord(Word o, String TableName) {
 
         DBHelper db = new DBHelper(mContext);
         String sql = "DELETE FROM " + TableName + " WHERE word='" + o.getWord() + "';";
         try {
             //db(sql);
 
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+
+    public boolean deleteWordTable(String[] tableNames) {
+
+        DBHelper db = new DBHelper(mContext);
+        ArrayList<String> deleteQueries = new ArrayList<>();
+        try {
+            for(String tableName: tableNames){
+                String sql = "DELETE FROM " + tableName;
+                deleteQueries.add(sql);
+
+            }
+            db.executeBulkQueries(deleteQueries);
             return true;
         } catch (Exception ex) {
             return false;
