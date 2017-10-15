@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/default_padding_large"
+        android:paddingRight="@dimen/default_padding_large">
+
+        <LinearLayout
+            android:id="@+id/profile_item_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/default_padding_small"
+            android:paddingTop="@dimen/default_padding_small">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                style="@style/TV_DEFAULT_LARGE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="5"
+                android:gravity="center"
+                android:text="မြန်မာ" />
+
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/swChangeFont"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="right" />
+
+            <TextView
+                android:id="@+id/tvCarrier"
+                style="@style/TV_DEFAULT_LARGE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="5"
+                android:gravity="center"
+                android:text="ျမန္မာ" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

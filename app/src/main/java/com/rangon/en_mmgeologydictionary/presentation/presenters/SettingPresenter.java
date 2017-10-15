@@ -1,6 +1,9 @@
 package com.rangon.en_mmgeologydictionary.presentation.presenters;
 
+import com.rangon.en_mmgeologydictionary.model.SettingItem;
 import com.rangon.en_mmgeologydictionary.presentation.view.BaseView;
+
+import java.util.List;
 
 /**
  * Created by winhtaikaung on 15/10/17.
@@ -13,9 +16,9 @@ public interface SettingPresenter {
 
     void fontSelected();
     interface View extends BaseView {
-        void onLoadInitialData();
+        void onLoadInitialData(List<SettingItem> settingItems);
 
-        void onAppDataReset();
+        void onAppDataReset(boolean b);
 
         void onFontSelected();
 
