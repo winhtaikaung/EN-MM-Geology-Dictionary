@@ -16,6 +16,7 @@ public interface WordsDataStore {
     Observable<List<Word>> getLikelyWord(String searchKeyword);
 
     Observable<Boolean> deleteWordTables(String[] tableNames);
+
     /**
      * @param wordIndex a,b,c..etc
      * @param page

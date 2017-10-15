@@ -1,5 +1,6 @@
 package com.rangon.en_mmgeologydictionary.presentation.presenters;
 
+import com.rangon.en_mmgeologydictionary.data.cache.AppDataCache;
 import com.rangon.en_mmgeologydictionary.model.SettingItem;
 import com.rangon.en_mmgeologydictionary.presentation.view.BaseView;
 
@@ -10,11 +11,12 @@ import java.util.List;
  */
 
 public interface SettingPresenter {
-    void loadInitialData();
+    void loadInitialData(AppDataCache appDataCache);
 
     void resetAppData();
 
     void fontSelected();
+
     interface View extends BaseView {
         void onLoadInitialData(List<SettingItem> settingItems);
 

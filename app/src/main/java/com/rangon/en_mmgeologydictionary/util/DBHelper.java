@@ -185,7 +185,6 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-
     public void executeBulkQueries(ArrayList<String> arrSql) throws SQLiteException {
         SQLiteDatabase database = this.getWritableDatabase();
         try {

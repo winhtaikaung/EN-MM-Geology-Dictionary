@@ -9,8 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CompoundButton;
 
 import com.rangon.en_mmgeologydictionary.R;
+import com.rangon.en_mmgeologydictionary.data.cache.AppDataCache;
 import com.rangon.en_mmgeologydictionary.data.cache.AppDataCacheImpl;
 import com.rangon.en_mmgeologydictionary.data.repository.WordsDataRepository;
 import com.rangon.en_mmgeologydictionary.data.repository.datasource.WordDataStoreFactory;
@@ -31,17 +33,15 @@ import butterknife.ButterKnife;
  * Created by winhtaikaung on 8/10/17.
  */
 
-public class SettingFragment extends Fragment implements SettingPresenter.View, AdapterView.OnItemClickListener {
+public class SettingFragment extends Fragment implements SettingPresenter.View, AdapterView.OnItemClickListener, AdapterSettingList.ISettingSwitchHandler {
 
     @BindView(R.id.rv_setting_List)
     RecyclerView rvSettingList;
-
+    AdapterSettingList mSettingListAdapter;
+    AppDataCache appDataCache;
     private SettingPresenter mSettingPresenter;
     private WordDataStoreFactory mWordDataStoreFactory;
     private WordsDataRepository mWordsDataRepository;
-
-    AdapterSettingList mSettingListAdapter;
-
 
     @Nullable
     @Override
@@ -51,18 +51,19 @@ public class SettingFragment extends Fragment implements SettingPresenter.View, 
         mWordDataStoreFactory = new WordDataStoreFactory(new AppDataCacheImpl(this.getContext()));
         mWordsDataRepository = new WordsDataRepository(mWordDataStoreFactory, new WordDAL(this.getContext()));
         mSettingPresenter = new SettingPresenterImpl(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(), this, mWordsDataRepository);
-        mSettingPresenter.loadInitialData();
+        appDataCache = new AppDataCacheImpl(this.getContext());
+        mSettingPresenter.loadInitialData(appDataCache);
+
         return v;
     }
 
     @Override
     public void onLoadInitialData(List<SettingItem> settingItemList) {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
-        mSettingListAdapter = new AdapterSettingList();
+        mSettingListAdapter = new AdapterSettingList(this);
         mSettingListAdapter.setOnItemClickListener(this);
         rvSettingList.setLayoutManager(mLayoutManager);
         rvSettingList.setAdapter(mSettingListAdapter);
-
         mSettingListAdapter.setSettingList(settingItemList);
     }
 
@@ -99,5 +100,15 @@ public class SettingFragment extends Fragment implements SettingPresenter.View, 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+    }
+
+    @Override
+    public void OnSettingSwitchChanged(CompoundButton view, boolean checked) {
+        if (checked) {
+            appDataCache.setUnicode(checked);
+        } else {
+            appDataCache.setUnicode(checked);
+        }
+//        mSettingPresenter.loadInitialData(appDataCache);
     }
 }

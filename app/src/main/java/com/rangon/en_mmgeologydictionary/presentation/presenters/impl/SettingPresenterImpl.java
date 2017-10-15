@@ -1,6 +1,7 @@
 package com.rangon.en_mmgeologydictionary.presentation.presenters.impl;
 
 import com.rangon.en_mmgeologydictionary.R;
+import com.rangon.en_mmgeologydictionary.data.cache.AppDataCache;
 import com.rangon.en_mmgeologydictionary.domain.executor.Executor;
 import com.rangon.en_mmgeologydictionary.domain.executor.MainThread;
 import com.rangon.en_mmgeologydictionary.domain.interactors.DeleteWordTablesInteractor;
@@ -33,13 +34,16 @@ public class SettingPresenterImpl extends AbstractPresenter implements SettingPr
     }
 
     @Override
-    public void loadInitialData() {
+    public void loadInitialData(AppDataCache cache) {
         //load font data setting etc
         String[] mSettingListTitles = {"About Us", "Reset", "Font"};
         int[] mSettingListIcons = {R.drawable.ic_info, R.drawable.ic_reset, 999};
         List<SettingItem> settingItems = new ArrayList<>();
-        for (int i = 0;i < mSettingListTitles.length; i++) {
-            SettingItem item = new SettingItem().SettingListItem(mSettingListTitles[i],mSettingListIcons[i]);
+        for (int i = 0; i < mSettingListTitles.length; i++) {
+            SettingItem item = new SettingItem().SettingListItem(mSettingListTitles[i], mSettingListIcons[i]);
+            if (i == mSettingListTitles.length - 1) {
+                item = new SettingItem().SettingListItem(mSettingListTitles[i], mSettingListIcons[i], true, cache.isUnicode());
+            }
             settingItems.add(item);
         }
 

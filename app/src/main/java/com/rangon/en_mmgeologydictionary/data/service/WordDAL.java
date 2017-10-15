@@ -97,7 +97,7 @@ public class WordDAL {
         DBHelper db = new DBHelper(mContext);
         ArrayList<String> deleteQueries = new ArrayList<>();
         try {
-            for(String tableName: tableNames){
+            for (String tableName : tableNames) {
                 String sql = "DELETE FROM " + tableName;
                 deleteQueries.add(sql);
 

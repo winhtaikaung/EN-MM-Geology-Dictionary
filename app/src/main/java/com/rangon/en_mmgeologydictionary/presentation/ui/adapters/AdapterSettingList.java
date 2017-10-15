@@ -1,6 +1,7 @@
 package com.rangon.en_mmgeologydictionary.presentation.ui.adapters;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,9 +31,11 @@ public class AdapterSettingList extends BaseAdapter<BaseAdapter.BaseViewHolder> 
     List<SettingItem> mSettingList;
     int FONT_SWITCHER_VIEW = 999;
     int DEFAULT_SETTING_ITEM_VIEW = 111;
+    Fragment mFragment;
     private boolean onBind;
 
-    public AdapterSettingList() {
+    public AdapterSettingList(Fragment fragment) {
+        mFragment = fragment;
         mSettingList = new ArrayList<>();
     }
 
@@ -77,7 +80,7 @@ public class AdapterSettingList extends BaseAdapter<BaseAdapter.BaseViewHolder> 
             SettingItem viewItem = (SettingItem) mSettingList.get(position);
             vh.swChangeFont.setOnCheckedChangeListener(this);
             onBind = true;
-//            vh.swChangeFont.setChecked(MySharedPreference.getInstance(mContext).getBooleanPreference(IS_MERCHANT, false));
+            vh.swChangeFont.setChecked(viewItem.isChecked());
             onBind = false;
 
         }
@@ -90,7 +93,7 @@ public class AdapterSettingList extends BaseAdapter<BaseAdapter.BaseViewHolder> 
 
     @Override
     public int getItemViewType(int position) {
-        if (position == mSettingList.size()-1) {
+        if (position == mSettingList.size() - 1) {
             return FONT_SWITCHER_VIEW;
         } else {
             return DEFAULT_SETTING_ITEM_VIEW;
@@ -99,7 +102,12 @@ public class AdapterSettingList extends BaseAdapter<BaseAdapter.BaseViewHolder> 
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        ISettingSwitchHandler handler = (ISettingSwitchHandler) mFragment;
+        handler.OnSettingSwitchChanged(compoundButton, b);
+    }
 
+    public interface ISettingSwitchHandler {
+        void OnSettingSwitchChanged(CompoundButton view, boolean checked);
     }
 
     class SettingsListItemViewHolder extends BaseViewHolder {
