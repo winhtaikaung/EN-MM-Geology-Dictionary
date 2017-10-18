@@ -9,4 +9,8 @@ public interface AppDataCache {
     boolean isCached();
 
     void setCached();
+
+    boolean isUnicode();
+
+    void setUnicode(boolean isUniOrZawgyi);
 }

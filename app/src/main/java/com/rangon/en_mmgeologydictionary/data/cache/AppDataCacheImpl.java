@@ -11,6 +11,7 @@ import com.rangon.en_mmgeologydictionary.data.sharedPref.MySharedPref;
 public class AppDataCacheImpl implements AppDataCache {
 
     private final String IS_CACHED = "IS_CACHED";
+    private final String IS_UNICODE = "IS_UNICODE";
 
     private Context mContext;
 
@@ -28,4 +29,15 @@ public class AppDataCacheImpl implements AppDataCache {
     public void setCached() {
         MySharedPref.getInstance(mContext).setBooleanPreference(IS_CACHED, true);
     }
+
+    @Override
+    public boolean isUnicode() {
+        return MySharedPref.getInstance(mContext).getBooleanPreference(IS_UNICODE, false);
+    }
+
+    @Override
+    public void setUnicode(boolean isUniOrZawgyi) {
+        MySharedPref.getInstance(mContext).setBooleanPreference(IS_UNICODE, isUniOrZawgyi);
+    }
+
 }

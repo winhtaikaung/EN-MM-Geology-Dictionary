@@ -15,6 +15,8 @@ public interface WordRepository {
 
     Observable<List<Word>> getLikelyWord(String searchKeyword);
 
+    Observable<Boolean> deleteWordTables(String[] tableNames);
+
     /**
      * @param wordIndex a,b,c,..z etc
      * @param page
