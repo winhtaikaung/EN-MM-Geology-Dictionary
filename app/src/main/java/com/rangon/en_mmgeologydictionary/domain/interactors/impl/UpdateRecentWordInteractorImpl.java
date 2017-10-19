@@ -2,46 +2,44 @@ package com.rangon.en_mmgeologydictionary.domain.interactors.impl;
 
 import com.rangon.en_mmgeologydictionary.domain.executor.Executor;
 import com.rangon.en_mmgeologydictionary.domain.executor.MainThread;
-import com.rangon.en_mmgeologydictionary.domain.interactors.GetLikelyWordsInteractor;
+import com.rangon.en_mmgeologydictionary.domain.interactors.UpdateRecentWordInteractor;
 import com.rangon.en_mmgeologydictionary.domain.interactors.base.AbstractInteractor;
 import com.rangon.en_mmgeologydictionary.domain.repository.WordRepository;
-import com.rangon.en_mmgeologydictionary.model.Word;
-
-import java.util.List;
 
 import io.reactivex.Observable;
 
 /**
- * Created by winhtaikaung on 16/7/17.
+ * Created by winhtaikaung on 18/10/17.
  */
 
-public class GetLikelyWordsInteractorImpl extends AbstractInteractor implements GetLikelyWordsInteractor {
-    private WordRepository mWordRepository;
+public class UpdateRecentWordInteractorImpl extends AbstractInteractor implements UpdateRecentWordInteractor {
+
+    private WordRepository mRepository;
     private Callback mCallback;
+    private String mWordId;
     private String mWord;
 
     /**
-     *
      * @param threadExecutor
      * @param mainThread
-     * @param wordRespository
+     * @param repository
      * @param word
+     * @param id
      * @param callback
      */
-    public GetLikelyWordsInteractorImpl(Executor threadExecutor, MainThread mainThread, WordRepository wordRespository, String word, Callback callback) {
+    public UpdateRecentWordInteractorImpl(Executor threadExecutor, MainThread mainThread, WordRepository repository, String word, String id, Callback callback) {
         super(threadExecutor, mainThread);
-        mWordRepository = wordRespository;
+        mRepository = repository;
         mCallback = callback;
+        mWordId = id;
         mWord = word;
     }
 
     @Override
     public void run() {
-        final Observable<List<Word>> wordListObservable = mWordRepository.getLikelyWord(mWord);
+        final Observable<Boolean> wordObservable = mRepository.updateRecentWord(mWord, mWordId);
         mMainThread.post(() -> {
-            mCallback.onLikelyWordsRetrieved(wordListObservable);
+            mCallback.onUpdateRecentWord(wordObservable);
         });
-
-
     }
 }

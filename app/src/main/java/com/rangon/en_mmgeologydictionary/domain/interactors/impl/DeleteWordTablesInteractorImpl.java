@@ -18,6 +18,14 @@ public class DeleteWordTablesInteractorImpl extends AbstractInteractor implement
     private Callback mCallback;
     private String[] mTableName;
 
+    /**
+     *
+     * @param threadExecutor
+     * @param mainThread
+     * @param repository
+     * @param tableName
+     * @param callback
+     */
     public DeleteWordTablesInteractorImpl(Executor threadExecutor, MainThread mainThread, WordRepository repository, String[] tableName, Callback callback) {
         super(threadExecutor, mainThread);
         mRepository = repository;

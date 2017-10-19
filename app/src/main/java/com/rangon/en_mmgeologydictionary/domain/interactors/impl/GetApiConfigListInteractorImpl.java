@@ -21,6 +21,15 @@ public class GetApiConfigListInteractorImpl extends AbstractInteractor implement
     private int mPage;
     private int mLimit;
 
+    /**
+     *
+     * @param threadExecutor
+     * @param mainThread
+     * @param repository
+     * @param page
+     * @param limit
+     * @param callback
+     */
     public GetApiConfigListInteractorImpl(Executor threadExecutor, MainThread mainThread, APIConfigRepository repository, int page, int limit, GetApiConfigListInteractor.Callback callback) {
         super(threadExecutor, mainThread);
         mApiconfigRepository = repository;

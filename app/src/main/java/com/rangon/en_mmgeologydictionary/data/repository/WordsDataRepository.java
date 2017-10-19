@@ -35,6 +35,11 @@ public class WordsDataRepository implements WordRepository {
         return mWordDataStoreFactory.create(mWordDal).getWord(word, id).map(word1 -> word1);
     }
 
+    @Override
+    public Observable<Boolean> updateRecentWord(String word, String id) {
+        return null;
+    }
+
     /**
      * @param searchKeyword
      * @return

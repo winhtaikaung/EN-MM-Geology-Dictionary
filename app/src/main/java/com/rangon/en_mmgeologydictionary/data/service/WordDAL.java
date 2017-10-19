@@ -52,6 +52,18 @@ public class WordDAL {
         return wordlist;
     }
 
+    public boolean updateRecent(String inputWord, String id) {
+        DBHelper db = new DBHelper(mContext);
+        char tableName = inputWord.charAt(0);
+        String sql = "UPDATE" + tableName + " SET is_fav = 'true',remark = datetime('now') WHERE id='" + id + "';";
+        try {
+            db.executeQuery(sql);
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+
     public boolean InsertWord(Word o, String TableName) {
 
         DBHelper db = new DBHelper(mContext);
