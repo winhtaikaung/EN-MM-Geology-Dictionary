@@ -1,6 +1,7 @@
 package com.rangon.en_mmgeologydictionary.presentation.ui.adapters;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,6 +62,9 @@ public class AdapterWordDetail extends BaseAdapter<BaseAdapter.BaseViewHolder> {
                         Word wordItem = mWord;
                         vh.tvWord.setTag(wordItem.getId());
                         vh.tvWord.setText(wordItem.getWord());
+                        if(TextUtils.isEmpty(wordItem.getType())){
+                            vh.tvWordType.setVisibility(View.GONE);
+                        }
                         vh.tvWordType.setText(wordItem.getType());
                     }
                 }

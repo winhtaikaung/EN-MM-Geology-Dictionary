@@ -55,7 +55,7 @@ public class WordDAL {
     public boolean updateRecent(String inputWord, String id) {
         DBHelper db = new DBHelper(mContext);
         char tableName = inputWord.charAt(0);
-        String sql = "UPDATE" + tableName + " SET is_fav = 'true',remark = datetime('now') WHERE id='" + id + "';";
+        String sql = "UPDATE " + tableName + " SET is_fav = '1',remark = datetime('now') WHERE id='" + id + "';";
         try {
             db.executeQuery(sql);
             return true;
@@ -70,13 +70,13 @@ public class WordDAL {
         String unionSql = "SELECT * FROM (";
         for (int i = 0; i < tableNames.length; i++) {
             if (i < tableNames.length - 1) {
-                unionSql += "SELECT * FROM " + tableNames[i] + " UNION \n";
+                unionSql += "SELECT * FROM " + tableNames[i] + " UNION ";
             } else {
                 unionSql += "SELECT * FROM " + tableNames[i] + " ";
             }
 
         }
-        String criteria = " WHERE RW.is_fav = '1'";
+        String criteria = " WHERE RW.is_fav = '1' ORDER BY remark DESC ";
         String end = ") AS RW ";
 
         int offset = (page == 0) ? 0 : (page - 1) * limit;

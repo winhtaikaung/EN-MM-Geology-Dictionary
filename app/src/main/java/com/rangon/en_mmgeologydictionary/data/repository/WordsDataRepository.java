@@ -37,7 +37,7 @@ public class WordsDataRepository implements WordRepository {
 
     @Override
     public Observable<Boolean> updateRecentWord(String word, String id) {
-        return null;
+        return mWordDataStoreFactory.create(mWordDal).updateRecentWord(word, id).map(aBoolean -> aBoolean);
     }
 
     /**
