@@ -44,6 +44,11 @@ public class WordsLocalDataStore implements WordsDataStore {
     }
 
     @Override
+    public Observable<List<Word>> getRecentWord(String[] tableNames,int limit, int page) {
+        return Observable.just(mWordDal.getRecentFavWords(tableNames,limit,page));
+    }
+
+    @Override
     public Observable<List<Word>> getWordList(String wordIndex, int page, int size) {
         // TODO fetch wordlist locally
         return Observable.just(new ArrayList<Word>());

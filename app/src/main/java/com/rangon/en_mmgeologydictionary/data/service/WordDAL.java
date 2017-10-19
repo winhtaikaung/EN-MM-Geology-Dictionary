@@ -64,6 +64,51 @@ public class WordDAL {
         }
     }
 
+    public List<Word> getRecentFavWords(String[] tableNames, int limit, int page) {
+
+
+        String unionSql = "SELECT * FROM (";
+        for (int i = 0; i < tableNames.length; i++) {
+            if (i < tableNames.length - 1) {
+                unionSql += "SELECT * FROM " + tableNames[i] + " UNION \n";
+            } else {
+                unionSql += "SELECT * FROM " + tableNames[i] + " ";
+            }
+
+        }
+        String criteria = " WHERE RW.is_fav = '1'";
+        String end = ") AS RW ";
+
+        int offset = (page == 0) ? 0 : (page - 1) * limit;
+        String sql = unionSql + end + criteria + " LIMIT " + limit + " OFFSET " + offset;
+        DBHelper db = new DBHelper(mContext);
+        List<Word> wordlist = new ArrayList<>();
+        try {
+            ArrayList<HashMap<String, String>> alist = null;
+            try {
+                alist = db.getDataTable(sql);
+                Log.i("alist", String.valueOf(alist.size()));
+                for (int i = 0; i < alist.size(); i++) {
+                    HashMap tableRow = (HashMap) alist.get(i);
+                    Word w = new Word();
+                    w.setId(tableRow.get("id").toString());
+                    w.setWord(tableRow.get("word").toString().replace("''", "'").toLowerCase());
+                    w.setMeaningZg(tableRow.get("meaning_zg").toString().replace("''", "'"));
+                    w.setMeaningUni(tableRow.get("meaning_uni").toString().replace("''", "'"));
+                    w.setType(tableRow.get("type").toString().toLowerCase());
+                    w.setFav(Boolean.valueOf(tableRow.get("is_fav").toString().toLowerCase()));
+                    wordlist.add(w);
+                }
+            } catch (NullPointerException ex) {
+                ex.printStackTrace();
+            }
+            return wordlist;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return wordlist;
+    }
+
     public boolean InsertWord(Word o, String TableName) {
 
         DBHelper db = new DBHelper(mContext);

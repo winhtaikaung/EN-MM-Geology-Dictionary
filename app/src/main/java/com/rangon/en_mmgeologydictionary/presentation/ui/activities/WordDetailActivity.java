@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -67,6 +68,7 @@ public class WordDetailActivity extends BaseActivity implements WordDetailPresen
         String word = intent.getExtras().getString("word");
         this.getSupportActionBar().setTitle(word);
         mWordDetailPresenter.getWordDetail(word, id);
+        mWordDetailPresenter.updateRecentWord(word,id);
 
     }
 
@@ -74,6 +76,11 @@ public class WordDetailActivity extends BaseActivity implements WordDetailPresen
     @Override
     public void onWordRetrieved(Word word) {
         mWordDetailAdatper.setWord(word);
+    }
+
+    @Override
+    public void onWordRecentUpdated(Boolean status) {
+        Log.e("IS_FAV",String.valueOf(status));
     }
 
     @Override

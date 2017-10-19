@@ -13,9 +13,11 @@ import io.reactivex.Observable;
 public interface WordRepository {
     Observable<Word> getWord(String word, String id);
 
-    Observable<Boolean> updateRecentWord(String word,String id);
+    Observable<Boolean> updateRecentWord(String word, String id);
 
     Observable<List<Word>> getLikelyWord(String searchKeyword);
+
+    Observable<List<Word>> getRecentWord(String[] tableNames, int limit, int page);
 
     Observable<Boolean> deleteWordTables(String[] tableNames);
 

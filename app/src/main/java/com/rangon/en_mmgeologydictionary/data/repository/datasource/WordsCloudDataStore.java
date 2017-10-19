@@ -49,6 +49,11 @@ public class WordsCloudDataStore implements WordsDataStore {
     }
 
     @Override
+    public Observable<List<Word>> getRecentWord(String[] tableNames,int limit, int page) {
+        return null;
+    }
+
+    @Override
     public Observable<List<Word>> getWordList(String wordIndex, int page, int size) {
         if (wordIndex.equalsIgnoreCase("last")) {
             mCache.setCached();

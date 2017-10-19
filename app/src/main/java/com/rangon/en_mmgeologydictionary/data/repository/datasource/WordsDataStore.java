@@ -19,6 +19,8 @@ public interface WordsDataStore {
 
     Observable<Boolean> updateRecentWord(String word,String id);
 
+    Observable<List<Word>> getRecentWord(String[] tableNames,int limit,int page);
+
     /**
      * @param wordIndex a,b,c..etc
      * @param page

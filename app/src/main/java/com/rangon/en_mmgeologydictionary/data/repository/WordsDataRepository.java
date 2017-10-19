@@ -50,6 +50,11 @@ public class WordsDataRepository implements WordRepository {
     }
 
     @Override
+    public Observable<List<Word>> getRecentWord(String[] tableNames, int limit, int page) {
+        return mWordDataStoreFactory.create(mWordDal).getRecentWord(tableNames, limit, page).map(words -> words);
+    }
+
+    @Override
     public Observable<Boolean> deleteWordTables(String[] tableName) {
         return mWordDataStoreFactory.create(mWordDal).deleteWordTables(tableName).map(aBoolean -> aBoolean);
     }

@@ -12,9 +12,13 @@ public interface WordDetailPresenter extends BaseView {
 
     void getWordDetail(String word, String id);
 
+    void updateRecentWord(String word,String id);
+
     interface View extends BaseView {
         void onInit();
 
         void onWordRetrieved(Word word);
+
+        void onWordRecentUpdated(Boolean status);
     }
 }
