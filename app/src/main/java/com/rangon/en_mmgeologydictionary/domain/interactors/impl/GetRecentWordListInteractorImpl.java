@@ -10,6 +10,7 @@ import com.rangon.en_mmgeologydictionary.model.Word;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
 
 /**
  * Created by win on 9/10/17.
@@ -36,7 +37,21 @@ public class GetRecentWordListInteractorImpl extends AbstractInteractor implemen
     public void run() {
         final Observable<List<Word>> wordObservable = mRepository.getRecentWord(mTableNames, mPage, mLimit);
         mMainThread.post(() -> {
-            mCallback.onRecentWordListRetrieved(wordObservable);
+            wordObservable.subscribe(new Consumer<List<Word>>() {
+                @Override
+                public void accept(List<Word> words) throws Exception {
+                    if (mPage == 1) {
+                        if (words.size() == 0) {
+                            mCallback.onEmptyItemReceived();
+                        } else {
+                            mCallback.onRecentWordListRetrieved(wordObservable);
+                        }
+                    }else{
+                        mCallback.onRecentWordListRetrieved(wordObservable);
+                    }
+                }
+            });
+
         });
     }
 }

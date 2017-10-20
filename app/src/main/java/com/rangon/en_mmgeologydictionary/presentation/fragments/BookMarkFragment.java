@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.rangon.en_mmgeologydictionary.R;
 import com.rangon.en_mmgeologydictionary.data.DAL.WordDAL;
@@ -35,6 +36,9 @@ public class BookMarkFragment extends Fragment implements BookmarkViewPresenter.
 
     @BindView(R.id.rv_word_list)
     RecyclerView mRvWordListView;
+
+    @BindView(R.id.tvError)
+    TextView mTvError;
 
     private BookmarkViewPresenter mBookmarkScreenPresenter;
     private WordDataStoreFactory mWordDataStoreFactory;
@@ -78,6 +82,7 @@ public class BookMarkFragment extends Fragment implements BookmarkViewPresenter.
 
     @Override
     public void onBookMarkDataLoaded(List<Word> bookMarkWordList) {
+
         if (bookMarkWordList.size() > 0) {
             if (mCounter == 1) {
                 mWordList = bookMarkWordList;
@@ -107,11 +112,13 @@ public class BookMarkFragment extends Fragment implements BookmarkViewPresenter.
 
     @Override
     public void showError(String message) {
-
+        mRvWordListView.setVisibility(View.GONE);
+        mTvError.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideError(String message) {
-
+        mRvWordListView.setVisibility(View.VISIBLE);
+        mTvError.setVisibility(View.GONE);
     }
 }
