@@ -27,14 +27,15 @@ import com.rangon.en_mmgeologydictionary.presentation.presenters.SearchScreenPre
 import com.rangon.en_mmgeologydictionary.presentation.presenters.impl.SearchScreenPresenterImpl;
 import com.rangon.en_mmgeologydictionary.presentation.ui.activities.WordDetailActivity;
 import com.rangon.en_mmgeologydictionary.presentation.ui.adapters.AdapterWordList;
+import com.rangon.en_mmgeologydictionary.presentation.ui.base.EndlessRecyclerViewAdapter;
 import com.rangon.en_mmgeologydictionary.threading.MainThreadImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 
@@ -61,6 +62,9 @@ public class SearchFragment extends Fragment implements SearchScreenPresenter.Vi
     private WordsDataRepository mWordsDataRepository;
 
     private AdapterWordList mWordListAdapter;
+    private EndlessRecyclerViewAdapter mEndlessRecyclerViewAdapter;
+    private int mCounter = 1;
+    private List<Word> mWordList;
 
 
     @Nullable
@@ -84,9 +88,9 @@ public class SearchFragment extends Fragment implements SearchScreenPresenter.Vi
         mWordListAdapter = new AdapterWordList();
         mWordListAdapter.setOnItemClickListener(this);
         mRvWordListView.setLayoutManager(mLayoutManager);
-        mRvWordListView.setAdapter(mWordListAdapter);
 
-        Disposable ovTvSearch = RxTextView.textChanges(mTvSearchEditText)
+
+        RxTextView.textChanges(mTvSearchEditText)
                 .skip(1)
                 .map(new Function<CharSequence, String>() {
                     @Override
@@ -94,11 +98,14 @@ public class SearchFragment extends Fragment implements SearchScreenPresenter.Vi
                         return charSequence.toString();
                     }
                 }).subscribe(new Consumer<String>() {
-                    @Override
-                    public void accept(String s) throws Exception {
-                        mSearchScreenPresenter.searchTextEnters(s);
-                    }
-                });
+            @Override
+            public void accept(String s) throws Exception {
+                mWordList = new ArrayList<>();
+                mWordListAdapter.setWordList(mWordList);
+                mCounter = 1;
+                mSearchScreenPresenter.searchTextEnters(s);
+            }
+        });
 
     }
 
@@ -130,13 +137,40 @@ public class SearchFragment extends Fragment implements SearchScreenPresenter.Vi
     @Override
     public void onLikelyWordListLoaded(List<Word> wordList) {
         Log.e("SEARCH_TEXT_COUNT", String.valueOf(wordList.size()));
-        mWordListAdapter.setWordList(wordList);
+        if (wordList.size() > 0) {
+            if (mCounter == 1) {
+                mWordList = wordList;
+            } else {
+
+                mWordList.addAll(wordList);
+
+            }
+            mWordListAdapter.setWordList(mWordList);
+            mEndlessRecyclerViewAdapter.onDataReady(true);
+            mCounter++;
+
+        } else {
+            mEndlessRecyclerViewAdapter.onDataReady(false);
+        }
 
     }
 
     @Override
     public void onSearchTextReceived(String searchText) {
-        mSearchScreenPresenter.loadLikelyWordList(searchText);
+
+        mEndlessRecyclerViewAdapter = new EndlessRecyclerViewAdapter(this.getActivity(), mWordListAdapter, new EndlessRecyclerViewAdapter.RequestToLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+                if (mCounter == 1) {
+                    mSearchScreenPresenter.loadLikelyWordList(searchText, 10, 1);
+                } else {
+                    mSearchScreenPresenter.loadLikelyWordList(searchText, 10, mCounter);
+                }
+            }
+        });
+        mRvWordListView.setAdapter(mEndlessRecyclerViewAdapter);
+
+
     }
 
     @Override

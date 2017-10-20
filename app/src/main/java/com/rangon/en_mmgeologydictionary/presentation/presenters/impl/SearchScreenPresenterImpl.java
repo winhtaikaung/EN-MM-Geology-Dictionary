@@ -39,9 +39,9 @@ public class SearchScreenPresenterImpl extends AbstractPresenter implements Sear
     }
 
     @Override
-    public void loadLikelyWordList(String searchText) {
+    public void loadLikelyWordList(String searchText, int limit, int page) {
         GetLikelyWordsInteractor getLikelyWordsInteractor = new GetLikelyWordsInteractorImpl(mExecutor, mMainThread, mWordsDataRepository,
-                searchText, this);
+                searchText, limit, page, this);
         getLikelyWordsInteractor.execute();
     }
 
@@ -52,15 +52,12 @@ public class SearchScreenPresenterImpl extends AbstractPresenter implements Sear
             public void accept(Throwable throwable) throws Exception {
                 mView.showError(throwable.getMessage());
             }
-        }).subscribe(new Consumer<List<Word>>() {
-            @Override
-            public void accept(List<Word> wordList) throws Exception {
-                if (wordList.size() == 0) {
-                    mView.showError("No words Found");
-                } else {
-                    mView.hideError("");
-                    mView.onLikelyWordListLoaded(wordList);
-                }
+        }).subscribe(wordList -> {
+            if (wordList.size() == 0) {
+                mView.showError("No words Found");
+            } else {
+                mView.hideError("");
+                mView.onLikelyWordListLoaded(wordList);
             }
         });
     }

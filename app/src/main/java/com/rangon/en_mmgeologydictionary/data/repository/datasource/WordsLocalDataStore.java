@@ -29,8 +29,8 @@ public class WordsLocalDataStore implements WordsDataStore {
     }
 
     @Override
-    public Observable<List<Word>> getLikelyWord(String searchKeyword) {
-        return Observable.just(mWordDal.getLikelyWords(searchKeyword));
+    public Observable<List<Word>> getLikelyWord(String searchKeyword,int limit,int page) {
+        return Observable.just(mWordDal.getLikelyWords(searchKeyword,limit,page));
     }
 
     @Override
