@@ -1,4 +1,4 @@
-package com.rangon.en_mmgeologydictionary.data.service;
+package com.rangon.en_mmgeologydictionary.data.DAL;
 
 import android.content.Context;
 import android.util.Log;

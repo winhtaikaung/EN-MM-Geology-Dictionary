@@ -10,10 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rangon.en_mmgeologydictionary.R;
+import com.rangon.en_mmgeologydictionary.data.DAL.WordDAL;
 import com.rangon.en_mmgeologydictionary.data.cache.AppDataCacheImpl;
 import com.rangon.en_mmgeologydictionary.data.repository.WordsDataRepository;
 import com.rangon.en_mmgeologydictionary.data.repository.datasource.WordDataStoreFactory;
-import com.rangon.en_mmgeologydictionary.data.service.WordDAL;
 import com.rangon.en_mmgeologydictionary.domain.executor.impl.ThreadExecutor;
 import com.rangon.en_mmgeologydictionary.model.Word;
 import com.rangon.en_mmgeologydictionary.presentation.presenters.BookmarkViewPresenter;
@@ -49,7 +49,7 @@ public class BookMarkFragment extends Fragment implements BookmarkViewPresenter.
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_bookmark, container, false);
-        ButterKnife.bind(this,v);
+        ButterKnife.bind(this, v);
         mWordDataStoreFactory = new WordDataStoreFactory(new AppDataCacheImpl(this.getContext()));
         mWordsDataRepository = new WordsDataRepository(mWordDataStoreFactory, new WordDAL(this.getContext()));
         mBookmarkScreenPresenter = new BookmarkViewPresenterImpl(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(),
@@ -67,9 +67,9 @@ public class BookMarkFragment extends Fragment implements BookmarkViewPresenter.
             @Override
             public void onLoadMoreRequested() {
                 if (mCounter == 1) {
-                    mBookmarkScreenPresenter.loadBookmarksData(10,1);
+                    mBookmarkScreenPresenter.loadBookmarksData(10, 1);
                 } else {
-                    mBookmarkScreenPresenter.loadBookmarksData(10,mCounter);
+                    mBookmarkScreenPresenter.loadBookmarksData(10, mCounter);
                 }
             }
         });

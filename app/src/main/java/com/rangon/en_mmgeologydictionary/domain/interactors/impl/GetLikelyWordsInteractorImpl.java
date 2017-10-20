@@ -21,7 +21,6 @@ public class GetLikelyWordsInteractorImpl extends AbstractInteractor implements 
     private String mWord;
 
     /**
-     *
      * @param threadExecutor
      * @param mainThread
      * @param wordRespository

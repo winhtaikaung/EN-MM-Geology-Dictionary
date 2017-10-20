@@ -22,7 +22,6 @@ public class GetApiConfigListInteractorImpl extends AbstractInteractor implement
     private int mLimit;
 
     /**
-     *
      * @param threadExecutor
      * @param mainThread
      * @param repository

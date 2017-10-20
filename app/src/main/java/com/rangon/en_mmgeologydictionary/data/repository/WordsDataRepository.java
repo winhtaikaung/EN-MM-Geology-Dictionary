@@ -1,7 +1,7 @@
 package com.rangon.en_mmgeologydictionary.data.repository;
 
+import com.rangon.en_mmgeologydictionary.data.DAL.WordDAL;
 import com.rangon.en_mmgeologydictionary.data.repository.datasource.WordDataStoreFactory;
-import com.rangon.en_mmgeologydictionary.data.service.WordDAL;
 import com.rangon.en_mmgeologydictionary.domain.repository.WordRepository;
 import com.rangon.en_mmgeologydictionary.model.Word;
 

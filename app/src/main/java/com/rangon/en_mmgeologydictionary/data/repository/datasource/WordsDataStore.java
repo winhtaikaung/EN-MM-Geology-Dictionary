@@ -17,9 +17,9 @@ public interface WordsDataStore {
 
     Observable<Boolean> deleteWordTables(String[] tableNames);
 
-    Observable<Boolean> updateRecentWord(String word,String id);
+    Observable<Boolean> updateRecentWord(String word, String id);
 
-    Observable<List<Word>> getRecentWord(String[] tableNames,int limit,int page);
+    Observable<List<Word>> getRecentWord(String[] tableNames, int limit, int page);
 
     /**
      * @param wordIndex a,b,c..etc

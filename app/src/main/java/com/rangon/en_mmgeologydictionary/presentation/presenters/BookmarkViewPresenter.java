@@ -12,7 +12,7 @@ import java.util.List;
 public interface BookmarkViewPresenter {
     void loadInitialData();
 
-    void loadBookmarksData(int limit,int page);
+    void loadBookmarksData(int limit, int page);
 
     interface View extends BaseView {
         void onInitialDataLoaded();
