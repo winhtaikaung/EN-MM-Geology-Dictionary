@@ -149,7 +149,7 @@ public class SearchFragment extends Fragment implements SearchScreenPresenter.Vi
                 mWordList.addAll(wordList);
 
             }
-            mWordListAdapter.setWordList(mWordList);
+            mWordListAdapter.setWordList(mWordList, false);
             mEndlessRecyclerViewAdapter.onDataReady(true);
             mCounter++;
 

@@ -98,7 +98,7 @@ public class BookMarkFragment extends Fragment implements BookmarkViewPresenter.
                     mWordList.addAll(bookMarkWordList);
 
                 }
-                mWordListAdapter.setWordList(mWordList);
+                mWordListAdapter.setWordList(mWordList, false);
                 mEndlessRecyclerViewAdapter.onDataReady(true);
                 mCounter++;
 
@@ -117,7 +117,7 @@ public class BookMarkFragment extends Fragment implements BookmarkViewPresenter.
                     mWordList.addAll(bookMarkWordList);
 
                 }
-                mWordListAdapter.setWordList(mWordList);
+                mWordListAdapter.setWordList(mWordList, false);
                 mEndlessRecyclerViewAdapter.onDataReady(true);
                 mCounter++;
 

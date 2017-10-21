@@ -110,6 +110,51 @@ public class WordDAL {
         return wordlist;
     }
 
+    public List<Word> getRelatedWords(String[] tableNames, String word, int limit) {
+
+
+        String unionSql = "SELECT * FROM (";
+        for (int i = 0; i < tableNames.length; i++) {
+            if (i < tableNames.length - 1) {
+                unionSql += "SELECT * FROM " + tableNames[i] + " UNION ";
+            } else {
+                unionSql += "SELECT * FROM " + tableNames[i] + " ";
+            }
+
+        }
+        String criteria = " WHERE RW.word like '" + word + "%' ORDER BY random()";
+        String end = ") AS RW ";
+
+
+        String sql = unionSql + end + criteria + " LIMIT " + limit;
+        DBHelper db = new DBHelper(mContext);
+        List<Word> wordlist = new ArrayList<>();
+        try {
+            ArrayList<HashMap<String, String>> alist = null;
+            try {
+                alist = db.getDataTable(sql);
+                Log.i("alist", String.valueOf(alist.size()));
+                for (int i = 0; i < alist.size(); i++) {
+                    HashMap tableRow = (HashMap) alist.get(i);
+                    Word w = new Word();
+                    w.setId(tableRow.get("id").toString());
+                    w.setWord(tableRow.get("word").toString().replace("''", "'").toLowerCase());
+                    w.setMeaningZg(tableRow.get("meaning_zg").toString().replace("''", "'"));
+                    w.setMeaningUni(tableRow.get("meaning_uni").toString().replace("''", "'"));
+                    w.setType(tableRow.get("type").toString().toLowerCase());
+                    w.setFav(Boolean.valueOf(tableRow.get("is_fav").toString().toLowerCase()));
+                    wordlist.add(w);
+                }
+            } catch (NullPointerException ex) {
+                ex.printStackTrace();
+            }
+            return wordlist;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return wordlist;
+    }
+
     public boolean InsertWord(Word o, String TableName) {
 
         DBHelper db = new DBHelper(mContext);

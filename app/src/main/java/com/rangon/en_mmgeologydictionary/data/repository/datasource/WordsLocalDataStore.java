@@ -49,6 +49,12 @@ public class WordsLocalDataStore implements WordsDataStore {
     }
 
     @Override
+    public Observable<List<Word>> getRelatedWord(String[] tableNames, String word, int limit) {
+        // TODO related wordlist here
+        return Observable.just(mWordDal.getRelatedWords(tableNames, word, limit));
+    }
+
+    @Override
     public Observable<List<Word>> getWordList(String wordIndex, int page, int size) {
         // TODO fetch wordlist locally
         return Observable.just(new ArrayList<Word>());

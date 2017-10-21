@@ -21,6 +21,8 @@ public interface WordsDataStore {
 
     Observable<List<Word>> getRecentWord(String[] tableNames, int limit, int page);
 
+    Observable<List<Word>> getRelatedWord(String[] tableNames, String word, int limit);
+
     /**
      * @param wordIndex a,b,c..etc
      * @param page
