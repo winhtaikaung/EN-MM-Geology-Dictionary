@@ -3,8 +3,8 @@ package com.rangon.en_mmgeologydictionary.domain.interactor;
 
 import com.rangon.en_mmgeologydictionary.domain.executor.Executor;
 import com.rangon.en_mmgeologydictionary.domain.executor.MainThread;
-import com.rangon.en_mmgeologydictionary.domain.interactors.GetLikelyWordsInteractor;
-import com.rangon.en_mmgeologydictionary.domain.interactors.impl.GetLikelyWordsInteractorImpl;
+import com.rangon.en_mmgeologydictionary.domain.interactors.GetRelatedWordsInteractor;
+import com.rangon.en_mmgeologydictionary.domain.interactors.impl.GetRelatedWordsInteractorImpl;
 import com.rangon.en_mmgeologydictionary.domain.repository.WordRepository;
 import com.rangon.en_mmgeologydictionary.model.Word;
 import com.rangon.en_mmgeologydictionary.threading.TestMainThread;
@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
  * Created by winhtaikaung on 20/3/17.
  */
 
-public class GetLikelyWordsInteractorTest {
+public class GetRelatedWordsInteractorTest {
 
     private MainThread mMainThread;
     @Mock
@@ -34,7 +34,7 @@ public class GetLikelyWordsInteractorTest {
     @Mock
     private WordRepository mWordRepository;
     @Mock
-    private GetLikelyWordsInteractor.Callback mMockedCallback;
+    private GetRelatedWordsInteractor.Callback mMockedCallback;
 
     @Before
     public void setUp() throws Exception {
@@ -44,7 +44,7 @@ public class GetLikelyWordsInteractorTest {
 
 
     @Test
-    public void testGetLikelyWordModel() throws Exception {
+    public void testGetRelatedWordList() throws Exception {
 
         Word dummyWordfirst = new Word("sdfg", "Mona", "http://ab.com", "http://www.flightstatus.com", "test", false
         );
@@ -57,18 +57,19 @@ public class GetLikelyWordsInteractorTest {
         dummyWordList.add(dummyWordfirst);
         dummyWordList.add(dummyWordsecond);
         dummyWordList.add(dummyWordthird);
+        String[] tablesName = {"a", "b", "c", "d"};
 
 
         Observable<List<Word>> dummyWordModel = Observable.just(dummyWordList);
 
-        when(mWordRepository.getLikelyWord("test", 10, 1))
+        when(mWordRepository.getRelatedWord(tablesName, "test", 10))
                 .thenReturn(dummyWordModel);
 
-        GetLikelyWordsInteractorImpl interactor = new GetLikelyWordsInteractorImpl(mExecutor, mMainThread, mWordRepository, "test", 10, 1, mMockedCallback);
+        GetRelatedWordsInteractorImpl interactor = new GetRelatedWordsInteractorImpl(mExecutor, mMainThread, mWordRepository, tablesName, "test", 10, mMockedCallback);
         interactor.run();
-        Mockito.verify(mWordRepository).getLikelyWord("test", 10, 1);
+        Mockito.verify(mWordRepository).getRelatedWord(tablesName, "test", 10);
         Mockito.verifyNoMoreInteractions(mWordRepository);
-        Mockito.verify(mMockedCallback).onLikelyWordsRetrieved(dummyWordModel);
+        Mockito.verify(mMockedCallback).onRelatedWordsRetrieved(dummyWordModel);
 
     }
 }
