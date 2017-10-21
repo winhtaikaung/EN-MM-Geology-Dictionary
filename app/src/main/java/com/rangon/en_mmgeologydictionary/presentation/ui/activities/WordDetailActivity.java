@@ -21,6 +21,8 @@ import com.rangon.en_mmgeologydictionary.presentation.presenters.impl.WordDetail
 import com.rangon.en_mmgeologydictionary.presentation.ui.adapters.AdapterWordDetail;
 import com.rangon.en_mmgeologydictionary.threading.MainThreadImpl;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -70,12 +72,20 @@ public class WordDetailActivity extends BaseActivity implements WordDetailPresen
         mWordDetailPresenter.getWordDetail(word, id);
         mWordDetailPresenter.updateRecentWord(word, id);
 
+
     }
 
 
     @Override
     public void onWordRetrieved(Word word) {
         mWordDetailAdatper.setWord(word);
+        mWordDetailPresenter.getRelatedWord(word.getWord());
+    }
+
+    @Override
+    public void onRelatedWordRetrieved(List<Word> relatedWordList) {
+        mWordDetailAdatper.setRelatedWords(relatedWordList);
+
     }
 
     @Override

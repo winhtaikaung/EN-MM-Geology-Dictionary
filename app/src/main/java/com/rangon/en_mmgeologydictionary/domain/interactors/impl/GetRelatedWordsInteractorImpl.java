@@ -24,7 +24,6 @@ public class GetRelatedWordsInteractorImpl extends AbstractInteractor implements
 
 
     /**
-     *
      * @param threadExecutor
      * @param mainThread
      * @param wordRespository
@@ -33,7 +32,7 @@ public class GetRelatedWordsInteractorImpl extends AbstractInteractor implements
      * @param limit
      * @param callback
      */
-    public GetRelatedWordsInteractorImpl(Executor threadExecutor, MainThread mainThread, WordRepository wordRespository,String[] tableNames, String word, int limit, Callback callback) {
+    public GetRelatedWordsInteractorImpl(Executor threadExecutor, MainThread mainThread, WordRepository wordRespository, String[] tableNames, String word, int limit, Callback callback) {
         super(threadExecutor, mainThread);
         mWordRepository = wordRespository;
         mCallback = callback;
@@ -44,7 +43,7 @@ public class GetRelatedWordsInteractorImpl extends AbstractInteractor implements
 
     @Override
     public void run() {
-        final Observable<List<Word>> wordListObservable = mWordRepository.getRelatedWord(mTableNames,mWord, mLimit);
+        final Observable<List<Word>> wordListObservable = mWordRepository.getRelatedWord(mTableNames, mWord, mLimit);
         mMainThread.post(() -> {
             mCallback.onRelatedWordsRetrieved(wordListObservable);
         });

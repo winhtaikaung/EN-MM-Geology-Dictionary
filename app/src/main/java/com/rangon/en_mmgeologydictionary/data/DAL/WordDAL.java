@@ -110,7 +110,7 @@ public class WordDAL {
         return wordlist;
     }
 
-    public List<Word> getRelatedWords(String[] tableNames,String word, int limit) {
+    public List<Word> getRelatedWords(String[] tableNames, String word, int limit) {
 
 
         String unionSql = "SELECT * FROM (";
@@ -126,7 +126,7 @@ public class WordDAL {
         String end = ") AS RW ";
 
 
-        String sql = unionSql + end + criteria + " LIMIT " + limit  ;
+        String sql = unionSql + end + criteria + " LIMIT " + limit;
         DBHelper db = new DBHelper(mContext);
         List<Word> wordlist = new ArrayList<>();
         try {
