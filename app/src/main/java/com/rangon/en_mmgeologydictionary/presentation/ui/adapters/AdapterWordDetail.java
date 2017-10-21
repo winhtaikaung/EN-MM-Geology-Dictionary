@@ -62,7 +62,7 @@ public class AdapterWordDetail extends BaseAdapter<BaseAdapter.BaseViewHolder> {
                         Word wordItem = mWord;
                         vh.tvWord.setTag(wordItem.getId());
                         vh.tvWord.setText(wordItem.getWord());
-                        if(TextUtils.isEmpty(wordItem.getType())){
+                        if (TextUtils.isEmpty(wordItem.getType())) {
                             vh.tvWordType.setVisibility(View.GONE);
                         }
                         vh.tvWordType.setText(wordItem.getType());

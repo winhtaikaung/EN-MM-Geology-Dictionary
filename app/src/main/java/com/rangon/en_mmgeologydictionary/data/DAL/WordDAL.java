@@ -1,4 +1,4 @@
-package com.rangon.en_mmgeologydictionary.data.service;
+package com.rangon.en_mmgeologydictionary.data.DAL;
 
 import android.content.Context;
 import android.util.Log;
@@ -24,11 +24,12 @@ public class WordDAL {
         indexingUtil = new IndexingUtil();
     }
 
-    public List<Word> getLikelyWords(String o) {
+    public List<Word> getLikelyWords(String o, int limit, int page) {
         DBHelper db = new DBHelper(mContext);
         String tableName = indexingUtil.gettableName(o.charAt(0));
-        String sql = "SELECT DISTINCT id,word,meaning_zg,meaning_uni,type,is_fav FROM " + tableName + " WHERE word LIKE '" + o + "%' LIMIT 10";
-        Log.i("after query", "after query");
+        int offset = (page == 0) ? 0 : (page - 1) * limit;
+        String sql = "SELECT DISTINCT word,id,meaning_zg,meaning_uni,type,is_fav FROM " + tableName + " WHERE word LIKE '" + o + "%' LIMIT " + limit + " OFFSET " + offset;
+        Log.w("AFTER_QUERY", sql);
         ArrayList<HashMap<String, String>> alist = null;
         List<Word> wordlist = new ArrayList<>();
         try {

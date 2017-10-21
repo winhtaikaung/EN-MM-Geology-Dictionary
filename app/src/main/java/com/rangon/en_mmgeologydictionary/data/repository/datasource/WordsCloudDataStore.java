@@ -1,7 +1,7 @@
 package com.rangon.en_mmgeologydictionary.data.repository.datasource;
 
+import com.rangon.en_mmgeologydictionary.data.DAL.WordDAL;
 import com.rangon.en_mmgeologydictionary.data.cache.AppDataCache;
-import com.rangon.en_mmgeologydictionary.data.service.WordDAL;
 import com.rangon.en_mmgeologydictionary.model.Word;
 import com.rangon.en_mmgeologydictionary.services.WordService;
 
@@ -34,7 +34,7 @@ public class WordsCloudDataStore implements WordsDataStore {
     }
 
     @Override
-    public Observable<List<Word>> getLikelyWord(String searchKeyword) {
+    public Observable<List<Word>> getLikelyWord(String searchKeyword,int limit,int page) {
         return null;
     }
 
@@ -49,7 +49,7 @@ public class WordsCloudDataStore implements WordsDataStore {
     }
 
     @Override
-    public Observable<List<Word>> getRecentWord(String[] tableNames,int limit, int page) {
+    public Observable<List<Word>> getRecentWord(String[] tableNames, int limit, int page) {
         return null;
     }
 

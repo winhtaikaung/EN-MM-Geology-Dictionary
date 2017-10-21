@@ -9,10 +9,10 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.rangon.en_mmgeologydictionary.R;
+import com.rangon.en_mmgeologydictionary.data.DAL.WordDAL;
 import com.rangon.en_mmgeologydictionary.data.cache.AppDataCacheImpl;
 import com.rangon.en_mmgeologydictionary.data.repository.WordsDataRepository;
 import com.rangon.en_mmgeologydictionary.data.repository.datasource.WordDataStoreFactory;
-import com.rangon.en_mmgeologydictionary.data.service.WordDAL;
 import com.rangon.en_mmgeologydictionary.domain.executor.impl.ThreadExecutor;
 import com.rangon.en_mmgeologydictionary.model.Word;
 import com.rangon.en_mmgeologydictionary.presentation.base.BaseActivity;
@@ -68,7 +68,7 @@ public class WordDetailActivity extends BaseActivity implements WordDetailPresen
         String word = intent.getExtras().getString("word");
         this.getSupportActionBar().setTitle(word);
         mWordDetailPresenter.getWordDetail(word, id);
-        mWordDetailPresenter.updateRecentWord(word,id);
+        mWordDetailPresenter.updateRecentWord(word, id);
 
     }
 
@@ -80,7 +80,7 @@ public class WordDetailActivity extends BaseActivity implements WordDetailPresen
 
     @Override
     public void onWordRecentUpdated(Boolean status) {
-        Log.e("IS_FAV",String.valueOf(status));
+        Log.e("IS_FAV", String.valueOf(status));
     }
 
     @Override

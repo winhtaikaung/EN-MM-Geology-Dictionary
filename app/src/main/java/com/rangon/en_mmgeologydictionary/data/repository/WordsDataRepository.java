@@ -1,7 +1,7 @@
 package com.rangon.en_mmgeologydictionary.data.repository;
 
+import com.rangon.en_mmgeologydictionary.data.DAL.WordDAL;
 import com.rangon.en_mmgeologydictionary.data.repository.datasource.WordDataStoreFactory;
-import com.rangon.en_mmgeologydictionary.data.service.WordDAL;
 import com.rangon.en_mmgeologydictionary.domain.repository.WordRepository;
 import com.rangon.en_mmgeologydictionary.model.Word;
 
@@ -45,8 +45,8 @@ public class WordsDataRepository implements WordRepository {
      * @return
      */
     @Override
-    public Observable<List<Word>> getLikelyWord(String searchKeyword) {
-        return mWordDataStoreFactory.create(mWordDal).getLikelyWord(searchKeyword).map(words -> words);
+    public Observable<List<Word>> getLikelyWord(String searchKeyword, int limit, int page) {
+        return mWordDataStoreFactory.create(mWordDal).getLikelyWord(searchKeyword, limit, page).map(words -> words);
     }
 
     @Override

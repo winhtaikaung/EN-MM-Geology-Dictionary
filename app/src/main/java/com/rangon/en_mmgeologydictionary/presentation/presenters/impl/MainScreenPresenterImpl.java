@@ -66,15 +66,19 @@ public class MainScreenPresenterImpl extends AbstractPresenter implements MainSc
         apiconfigList.doOnError(throwable ->
                 mView.onLoadInitialData(false))
                 .subscribe(apiConfigs -> {
-                    for (ApiConfig config : apiConfigs) {
-                        for (int i = 0; i <= config.getPageCount(); i++) {
+                    for (int j = 0; j < apiConfigs.size(); j++) {
+                        for (int i = 0; i <= apiConfigs.get(j).getPageCount(); i++) {
                             Log.e("PAGE-->", String.valueOf(i));
                             GetWordListInteractor getWordListInteractor = new GetWordListInteractorImpl(mExecutor,
                                     mMainThread,
-                                    mWordRepository, config.getWordIndex(), i, 100, MainScreenPresenterImpl.this);
+                                    mWordRepository, apiConfigs.get(j).getWordIndex(), i, 100, MainScreenPresenterImpl.this);
                             getWordListInteractor.execute();
                         }
+
                         Thread.sleep(500);
+                        if (j == apiConfigs.size() - 1) {
+                            mView.onLoadInitialData(true);
+                        }
                     }
                 });
     }

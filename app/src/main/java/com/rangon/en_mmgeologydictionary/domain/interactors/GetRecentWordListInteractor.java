@@ -15,5 +15,7 @@ public interface GetRecentWordListInteractor extends Interactor {
 
     interface Callback {
         void onRecentWordListRetrieved(Observable<List<Word>> wordListObservable);
+
+        void onEmptyItemReceived();
     }
 }

@@ -17,7 +17,7 @@ import io.reactivex.Observable;
  * Created by winhtaikaung on 29/7/17.
  */
 
-public class WordDetailPresenterImpl extends AbstractPresenter implements WordDetailPresenter, GetWordInteractor.Callback,UpdateRecentWordInteractor.Callback {
+public class WordDetailPresenterImpl extends AbstractPresenter implements WordDetailPresenter, GetWordInteractor.Callback, UpdateRecentWordInteractor.Callback {
 
     private WordDetailPresenter.View mView;
     private WordRepository mWordRepository;
@@ -42,7 +42,7 @@ public class WordDetailPresenterImpl extends AbstractPresenter implements WordDe
     @Override
     public void updateRecentWord(String word, String id) {
         UpdateRecentWordInteractor updateRecentWordInteractor = new UpdateRecentWordInteractorImpl(
-                mExecutor,mMainThread,mWordRepository,word,id,this
+                mExecutor, mMainThread, mWordRepository, word, id, this
         );
         updateRecentWordInteractor.execute();
     }

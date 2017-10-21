@@ -19,7 +19,6 @@ public class DeleteWordTablesInteractorImpl extends AbstractInteractor implement
     private String[] mTableName;
 
     /**
-     *
      * @param threadExecutor
      * @param mainThread
      * @param repository

@@ -1,7 +1,7 @@
 package com.rangon.en_mmgeologydictionary.data.repository.datasource;
 
+import com.rangon.en_mmgeologydictionary.data.DAL.WordDAL;
 import com.rangon.en_mmgeologydictionary.data.cache.AppDataCache;
-import com.rangon.en_mmgeologydictionary.data.service.WordDAL;
 import com.rangon.en_mmgeologydictionary.model.Word;
 
 import java.util.ArrayList;
@@ -29,8 +29,8 @@ public class WordsLocalDataStore implements WordsDataStore {
     }
 
     @Override
-    public Observable<List<Word>> getLikelyWord(String searchKeyword) {
-        return Observable.just(mWordDal.getLikelyWords(searchKeyword));
+    public Observable<List<Word>> getLikelyWord(String searchKeyword,int limit,int page) {
+        return Observable.just(mWordDal.getLikelyWords(searchKeyword,limit,page));
     }
 
     @Override
@@ -40,12 +40,12 @@ public class WordsLocalDataStore implements WordsDataStore {
 
     @Override
     public Observable<Boolean> updateRecentWord(String word, String id) {
-        return Observable.just(mWordDal.updateRecent(word,id));
+        return Observable.just(mWordDal.updateRecent(word, id));
     }
 
     @Override
-    public Observable<List<Word>> getRecentWord(String[] tableNames,int limit, int page) {
-        return Observable.just(mWordDal.getRecentFavWords(tableNames,limit,page));
+    public Observable<List<Word>> getRecentWord(String[] tableNames, int limit, int page) {
+        return Observable.just(mWordDal.getRecentFavWords(tableNames, limit, page));
     }
 
     @Override

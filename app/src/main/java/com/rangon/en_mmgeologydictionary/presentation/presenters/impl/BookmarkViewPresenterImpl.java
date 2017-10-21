@@ -12,6 +12,7 @@ import com.rangon.en_mmgeologydictionary.presentation.presenters.BookmarkViewPre
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
 
 /**
  * Created by winhtaikaung on 19/10/17.
@@ -32,8 +33,22 @@ public class BookmarkViewPresenterImpl extends AbstractPresenter implements Book
     public void onRecentWordListRetrieved(Observable<List<Word>> wordListObservable) {
         wordListObservable
                 .doOnError(throwable -> mView.showError(throwable.getMessage()))
-                .subscribe(wordList -> mView.onBookMarkDataLoaded(wordList));
+                .subscribe(new Consumer<List<Word>>() {
+                    @Override
+                    public void accept(List<Word> words) throws Exception {
 
+                        mView.onBookMarkDataLoaded(words);
+
+
+                    }
+                });
+
+
+    }
+
+    @Override
+    public void onEmptyItemReceived() {
+        mView.showError("");
     }
 
     @Override

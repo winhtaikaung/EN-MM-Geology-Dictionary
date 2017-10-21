@@ -12,11 +12,11 @@ import android.widget.AdapterView;
 import android.widget.CompoundButton;
 
 import com.rangon.en_mmgeologydictionary.R;
+import com.rangon.en_mmgeologydictionary.data.DAL.WordDAL;
 import com.rangon.en_mmgeologydictionary.data.cache.AppDataCache;
 import com.rangon.en_mmgeologydictionary.data.cache.AppDataCacheImpl;
 import com.rangon.en_mmgeologydictionary.data.repository.WordsDataRepository;
 import com.rangon.en_mmgeologydictionary.data.repository.datasource.WordDataStoreFactory;
-import com.rangon.en_mmgeologydictionary.data.service.WordDAL;
 import com.rangon.en_mmgeologydictionary.domain.executor.impl.ThreadExecutor;
 import com.rangon.en_mmgeologydictionary.model.SettingItem;
 import com.rangon.en_mmgeologydictionary.presentation.presenters.SettingPresenter;
