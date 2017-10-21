@@ -78,6 +78,7 @@ public class SearchFragment extends Fragment implements SearchScreenPresenter.Vi
         mSearchScreenPresenter = new SearchScreenPresenterImpl(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(),
                 this, mWordsDataRepository);
         mSearchScreenPresenter.loadInitialData();
+        showError("No word found");
         return v;
     }
 
@@ -100,10 +101,12 @@ public class SearchFragment extends Fragment implements SearchScreenPresenter.Vi
                 }).subscribe(new Consumer<String>() {
             @Override
             public void accept(String s) throws Exception {
-                mWordList = new ArrayList<>();
-                mWordListAdapter.setWordList(mWordList);
-                mCounter = 1;
-                mSearchScreenPresenter.searchTextEnters(s);
+                if (s.equalsIgnoreCase("")) {
+                    showError("No Word Found");
+                } else {
+                    hideError("");
+                    mSearchScreenPresenter.searchTextEnters(s);
+                }
             }
         });
 
@@ -136,7 +139,8 @@ public class SearchFragment extends Fragment implements SearchScreenPresenter.Vi
 
     @Override
     public void onLikelyWordListLoaded(List<Word> wordList) {
-        Log.e("SEARCH_TEXT_COUNT", String.valueOf(wordList.size()));
+
+        Log.e("QUERY_SIZE", String.valueOf(wordList.size()));
         if (wordList.size() > 0) {
             if (mCounter == 1) {
                 mWordList = wordList;
@@ -149,7 +153,9 @@ public class SearchFragment extends Fragment implements SearchScreenPresenter.Vi
             mEndlessRecyclerViewAdapter.onDataReady(true);
             mCounter++;
 
+
         } else {
+            Log.e("ON_DATA_READY", "FALSE");
             mEndlessRecyclerViewAdapter.onDataReady(false);
         }
 
@@ -157,6 +163,9 @@ public class SearchFragment extends Fragment implements SearchScreenPresenter.Vi
 
     @Override
     public void onSearchTextReceived(String searchText) {
+
+        mWordList = new ArrayList<>();
+        mSearchScreenPresenter.loadLikelyWordList(searchText, 10, 1);
 
         mEndlessRecyclerViewAdapter = new EndlessRecyclerViewAdapter(this.getActivity(), mWordListAdapter, new EndlessRecyclerViewAdapter.RequestToLoadMoreListener() {
             @Override
@@ -168,6 +177,7 @@ public class SearchFragment extends Fragment implements SearchScreenPresenter.Vi
                 }
             }
         });
+
         mRvWordListView.setAdapter(mEndlessRecyclerViewAdapter);
 
 

@@ -54,7 +54,8 @@ public class SearchScreenPresenterImpl extends AbstractPresenter implements Sear
             }
         }).subscribe(wordList -> {
             if (wordList.size() == 0) {
-                mView.showError("No words Found");
+//                mView.showError("No words Found");
+                mView.onLikelyWordListLoaded(wordList);
             } else {
                 mView.hideError("");
                 mView.onLikelyWordListLoaded(wordList);

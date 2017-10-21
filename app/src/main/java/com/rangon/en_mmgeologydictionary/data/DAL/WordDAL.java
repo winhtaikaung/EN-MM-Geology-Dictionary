@@ -28,8 +28,8 @@ public class WordDAL {
         DBHelper db = new DBHelper(mContext);
         String tableName = indexingUtil.gettableName(o.charAt(0));
         int offset = (page == 0) ? 0 : (page - 1) * limit;
-        String sql = "SELECT DISTINCT id,word,meaning_zg,meaning_uni,type,is_fav FROM " + tableName + " WHERE word LIKE '" + o + "%' LIMIT " + limit + " OFFSET " + offset;
-        Log.i("after query", "after query");
+        String sql = "SELECT DISTINCT word,id,meaning_zg,meaning_uni,type,is_fav FROM " + tableName + " WHERE word LIKE '" + o + "%' LIMIT " + limit + " OFFSET " + offset;
+        Log.w("AFTER_QUERY", sql);
         ArrayList<HashMap<String, String>> alist = null;
         List<Word> wordlist = new ArrayList<>();
         try {

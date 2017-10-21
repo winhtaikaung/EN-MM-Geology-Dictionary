@@ -67,6 +67,7 @@ public class BookMarkFragment extends Fragment implements BookmarkViewPresenter.
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
         mWordListAdapter = new AdapterWordList();
         mRvWordListView.setLayoutManager(mLayoutManager);
+
         mEndlessRecyclerViewAdapter = new EndlessRecyclerViewAdapter(this.getActivity(), mWordListAdapter, new EndlessRecyclerViewAdapter.RequestToLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
@@ -82,21 +83,43 @@ public class BookMarkFragment extends Fragment implements BookmarkViewPresenter.
 
     @Override
     public void onBookMarkDataLoaded(List<Word> bookMarkWordList) {
+        if(mCounter == 1) {
 
-        if (bookMarkWordList.size() > 0) {
-            if (mCounter == 1) {
-                mWordList = bookMarkWordList;
+            if (bookMarkWordList.size() > 0) {
+
+                if (mCounter == 1) {
+                    mWordList = bookMarkWordList;
+                } else {
+
+                    mWordList.addAll(bookMarkWordList);
+
+                }
+                mWordListAdapter.setWordList(mWordList);
+                mEndlessRecyclerViewAdapter.onDataReady(true);
+                mCounter++;
+
             } else {
-
-                mWordList.addAll(bookMarkWordList);
-
+                showError("No word found");
+                mEndlessRecyclerViewAdapter.onDataReady(false);
             }
-            mWordListAdapter.setWordList(mWordList);
-            mEndlessRecyclerViewAdapter.onDataReady(true);
-            mCounter++;
+        }else{
+            hideError("");
+            if (bookMarkWordList.size() > 0) {
 
-        } else {
-            mEndlessRecyclerViewAdapter.onDataReady(false);
+                if (mCounter == 1) {
+                    mWordList = bookMarkWordList;
+                } else {
+
+                    mWordList.addAll(bookMarkWordList);
+
+                }
+                mWordListAdapter.setWordList(mWordList);
+                mEndlessRecyclerViewAdapter.onDataReady(true);
+                mCounter++;
+
+            } else {
+                mEndlessRecyclerViewAdapter.onDataReady(false);
+            }
         }
     }
 
@@ -114,6 +137,7 @@ public class BookMarkFragment extends Fragment implements BookmarkViewPresenter.
     public void showError(String message) {
         mRvWordListView.setVisibility(View.GONE);
         mTvError.setVisibility(View.VISIBLE);
+        mTvError.setText(message);
     }
 
     @Override

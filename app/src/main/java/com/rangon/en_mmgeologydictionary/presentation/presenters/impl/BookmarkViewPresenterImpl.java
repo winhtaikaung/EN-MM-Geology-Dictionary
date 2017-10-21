@@ -36,12 +36,13 @@ public class BookmarkViewPresenterImpl extends AbstractPresenter implements Book
                 .subscribe(new Consumer<List<Word>>() {
                     @Override
                     public void accept(List<Word> words) throws Exception {
+
                         mView.onBookMarkDataLoaded(words);
+
 
                     }
                 });
-        mView.hideProgress();
-        mView.hideError("");
+
 
     }
 

@@ -27,7 +27,7 @@ android {
         }
         staging {
             applicationIdSuffix ".stage"
-            buildConfigField "String", "APP_GATEWAY", "\"http://192.168.1.103/api/\""
+            buildConfigField "String", "APP_GATEWAY", "\"http://192.168.1.114/api/\""
         }
         production {
         }
