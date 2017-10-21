@@ -46,7 +46,7 @@ public class GetRecentWordListInteractorImpl extends AbstractInteractor implemen
                         } else {
                             mCallback.onRecentWordListRetrieved(wordObservable);
                         }
-                    }else{
+                    } else {
                         mCallback.onRecentWordListRetrieved(wordObservable);
                     }
                 }

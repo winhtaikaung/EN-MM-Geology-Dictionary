@@ -15,7 +15,7 @@ public interface WordRepository {
 
     Observable<Boolean> updateRecentWord(String word, String id);
 
-    Observable<List<Word>> getLikelyWord(String searchKeyword,int limit,int page);
+    Observable<List<Word>> getLikelyWord(String searchKeyword, int limit, int page);
 
     Observable<List<Word>> getRecentWord(String[] tableNames, int limit, int page);
 

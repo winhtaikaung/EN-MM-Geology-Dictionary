@@ -34,7 +34,7 @@ public class WordsCloudDataStore implements WordsDataStore {
     }
 
     @Override
-    public Observable<List<Word>> getLikelyWord(String searchKeyword,int limit,int page) {
+    public Observable<List<Word>> getLikelyWord(String searchKeyword, int limit, int page) {
         return null;
     }
 

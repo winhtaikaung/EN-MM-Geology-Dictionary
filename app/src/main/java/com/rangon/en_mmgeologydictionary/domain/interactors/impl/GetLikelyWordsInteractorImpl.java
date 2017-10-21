@@ -30,7 +30,7 @@ public class GetLikelyWordsInteractorImpl extends AbstractInteractor implements 
      * @param word
      * @param callback
      */
-    public GetLikelyWordsInteractorImpl(Executor threadExecutor, MainThread mainThread, WordRepository wordRespository, String word,int limit,int page, Callback callback) {
+    public GetLikelyWordsInteractorImpl(Executor threadExecutor, MainThread mainThread, WordRepository wordRespository, String word, int limit, int page, Callback callback) {
         super(threadExecutor, mainThread);
         mWordRepository = wordRespository;
         mCallback = callback;
@@ -41,7 +41,7 @@ public class GetLikelyWordsInteractorImpl extends AbstractInteractor implements 
 
     @Override
     public void run() {
-        final Observable<List<Word>> wordListObservable = mWordRepository.getLikelyWord(mWord,mLimit,mPage);
+        final Observable<List<Word>> wordListObservable = mWordRepository.getLikelyWord(mWord, mLimit, mPage);
         mMainThread.post(() -> {
             mCallback.onLikelyWordsRetrieved(wordListObservable);
         });

@@ -30,15 +30,12 @@ public class DataFetchService extends IntentService implements MainScreenPresent
     public static final int STATUS_RUNNING = 0;
     public static final int STATUS_FINISHED = 1;
     public static final int STATUS_ERROR = 2;
-
-
+    ResultReceiver receiver;
     private MainScreenPresenter mMainScreenPresenter;
     private WordDataStoreFactory mWordDataStoreFactory;
     private WordsDataRepository mWordDataRepository;
-
     private ApiConfigDataStoreFactory mApiConfigDataStoreFactory;
     private ApiConfigDataRepository mApiConfigDataRepository;
-    ResultReceiver receiver;
 
     /**
      * Creates an IntentService.  Invoked by your subclass's constructor.

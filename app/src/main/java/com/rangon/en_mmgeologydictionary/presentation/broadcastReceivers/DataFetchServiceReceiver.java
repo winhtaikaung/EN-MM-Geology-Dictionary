@@ -27,15 +27,14 @@ public class DataFetchServiceReceiver extends ResultReceiver {
         mReceiver = receiver;
     }
 
-
-    public interface Receiver {
-        public void onReceiveResult(int resultCode, Bundle resultData);
-    }
-
     @Override
     protected void onReceiveResult(int resultCode, Bundle resultData) {
         if (mReceiver != null) {
             mReceiver.onReceiveResult(resultCode, resultData);
         }
+    }
+
+    public interface Receiver {
+        public void onReceiveResult(int resultCode, Bundle resultData);
     }
 }

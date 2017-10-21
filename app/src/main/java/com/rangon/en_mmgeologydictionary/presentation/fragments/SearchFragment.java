@@ -78,7 +78,7 @@ public class SearchFragment extends Fragment implements SearchScreenPresenter.Vi
         mSearchScreenPresenter = new SearchScreenPresenterImpl(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(),
                 this, mWordsDataRepository);
         mSearchScreenPresenter.loadInitialData();
-        showError("No word found");
+        showError(this.getResources().getString(R.string.no_word_found));
         return v;
     }
 
@@ -102,7 +102,7 @@ public class SearchFragment extends Fragment implements SearchScreenPresenter.Vi
             @Override
             public void accept(String s) throws Exception {
                 if (s.equalsIgnoreCase("")) {
-                    showError("No Word Found");
+                    showError(SearchFragment.this.getResources().getString(R.string.no_word_found));
                 } else {
                     hideError("");
                     mSearchScreenPresenter.searchTextEnters(s);
