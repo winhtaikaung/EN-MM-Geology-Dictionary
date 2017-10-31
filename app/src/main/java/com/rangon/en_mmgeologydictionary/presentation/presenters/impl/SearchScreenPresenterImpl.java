@@ -11,6 +11,8 @@ import com.rangon.en_mmgeologydictionary.presentation.presenters.SearchScreenPre
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 
@@ -22,6 +24,7 @@ public class SearchScreenPresenterImpl extends AbstractPresenter implements Sear
     private SearchScreenPresenter.View mView;
     private WordRepository mWordsDataRepository;
 
+    @Inject
     public SearchScreenPresenterImpl(Executor executor, MainThread mainThread, View view, WordRepository wordRepo) {
         super(executor, mainThread);
         this.mView = view;

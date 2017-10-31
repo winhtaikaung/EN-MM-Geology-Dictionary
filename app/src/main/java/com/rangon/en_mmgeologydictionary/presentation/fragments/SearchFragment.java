@@ -3,7 +3,6 @@ package com.rangon.en_mmgeologydictionary.presentation.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,21 +16,21 @@ import android.widget.TextView;
 
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.rangon.en_mmgeologydictionary.R;
-import com.rangon.en_mmgeologydictionary.data.DAL.WordDAL;
-import com.rangon.en_mmgeologydictionary.data.cache.AppDataCacheImpl;
+import com.rangon.en_mmgeologydictionary.dagger.SearchFragmentModule;
+import com.rangon.en_mmgeologydictionary.dagger.component.AppComponent;
 import com.rangon.en_mmgeologydictionary.data.repository.WordsDataRepository;
 import com.rangon.en_mmgeologydictionary.data.repository.datasource.WordDataStoreFactory;
-import com.rangon.en_mmgeologydictionary.domain.executor.impl.ThreadExecutor;
 import com.rangon.en_mmgeologydictionary.model.Word;
 import com.rangon.en_mmgeologydictionary.presentation.presenters.SearchScreenPresenter;
-import com.rangon.en_mmgeologydictionary.presentation.presenters.impl.SearchScreenPresenterImpl;
 import com.rangon.en_mmgeologydictionary.presentation.ui.activities.WordDetailActivity;
 import com.rangon.en_mmgeologydictionary.presentation.ui.adapters.AdapterWordList;
+import com.rangon.en_mmgeologydictionary.presentation.ui.base.BaseFragment;
 import com.rangon.en_mmgeologydictionary.presentation.ui.base.EndlessRecyclerViewAdapter;
-import com.rangon.en_mmgeologydictionary.threading.MainThreadImpl;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,21 +42,18 @@ import io.reactivex.functions.Function;
  * Created by winhtaikaung on 8/10/17.
  */
 
-public class SearchFragment extends Fragment implements SearchScreenPresenter.View, AdapterView.OnItemClickListener {
+public class SearchFragment extends BaseFragment implements SearchScreenPresenter.View, AdapterView.OnItemClickListener {
 
+    @Inject
+    public SearchScreenPresenter mSearchScreenPresenter;
     @BindView(R.id.rv_word_list)
     RecyclerView mRvWordListView;
-
     @BindView(R.id.tvSearch)
     AppCompatEditText mTvSearchEditText;
-
     @BindView(R.id.list_layout)
     LinearLayout mListLayout;
-
     @BindView(R.id.tvError)
     TextView tvErrorText;
-
-    private SearchScreenPresenter mSearchScreenPresenter;
     private WordDataStoreFactory mWordDataStoreFactory;
     private WordsDataRepository mWordsDataRepository;
 
@@ -72,14 +68,14 @@ public class SearchFragment extends Fragment implements SearchScreenPresenter.Vi
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_search, container, false);
         ButterKnife.bind(this, v);
-
-        mWordDataStoreFactory = new WordDataStoreFactory(new AppDataCacheImpl(this.getContext()));
-        mWordsDataRepository = new WordsDataRepository(mWordDataStoreFactory, new WordDAL(this.getContext()));
-        mSearchScreenPresenter = new SearchScreenPresenterImpl(ThreadExecutor.getInstance(), MainThreadImpl.getInstance(),
-                this, mWordsDataRepository);
         mSearchScreenPresenter.loadInitialData();
         showError(this.getResources().getString(R.string.no_word_found));
         return v;
+    }
+
+    @Override
+    public void injectDependencies(AppComponent component) {
+        component.plus(new SearchFragmentModule(this, this.getContext())).inject(this);
     }
 
 
@@ -199,4 +195,6 @@ public class SearchFragment extends Fragment implements SearchScreenPresenter.Vi
         }
 
     }
+
+
 }
