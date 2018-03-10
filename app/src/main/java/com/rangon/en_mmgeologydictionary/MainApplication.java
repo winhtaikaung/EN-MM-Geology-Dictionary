@@ -3,6 +3,7 @@ package com.rangon.en_mmgeologydictionary;
 import android.app.Application;
 
 import com.rangon.en_mmgeologydictionary.dagger.baseModules.ExecutorModule;
+import com.rangon.en_mmgeologydictionary.dagger.baseModules.SharedPrefModule;
 import com.rangon.en_mmgeologydictionary.dagger.baseModules.ThreadModule;
 import com.rangon.en_mmgeologydictionary.dagger.baseModules.WordDataModule;
 import com.rangon.en_mmgeologydictionary.dagger.component.AppComponent;
@@ -40,6 +41,7 @@ public class MainApplication extends Application {
         setInstance(this);
         applicationComponent = DaggerAppComponent.builder().executorModule(new ExecutorModule())
                 .threadModule(new ThreadModule())
+                .sharedPrefModule(new SharedPrefModule(this.getApplicationContext()))
                 .wordDataModule(new WordDataModule(this.getApplicationContext())).build();
     }
 

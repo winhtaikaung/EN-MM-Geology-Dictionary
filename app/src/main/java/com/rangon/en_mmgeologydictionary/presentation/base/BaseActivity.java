@@ -9,7 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.rangon.en_mmgeologydictionary.R;
-import com.rangon.en_mmgeologydictionary.util.MySharedPreference;
+import com.rangon.en_mmgeologydictionary.data.sharedPref.MySharedPref;
+
+import javax.inject.Inject;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -21,7 +23,8 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public abstract class BaseActivity extends AppCompatActivity {
 
     private Toolbar toolBar;
-    private MySharedPreference mySharedPreference;
+    @Inject
+    protected MySharedPref mySharedPreference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +34,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 .setFontAttrId(R.attr.fontPath)
                 .build()
         );
-        mySharedPreference = new MySharedPreference(this);
+
         setContentView(getLayoutResource());
         this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         toolBar = (Toolbar) this.findViewById(R.id.toolbar);
@@ -55,10 +58,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(b);
         }
-    }
-
-    public MySharedPreference getSharedPref() {
-        return this.mySharedPreference;
     }
 
     @Override

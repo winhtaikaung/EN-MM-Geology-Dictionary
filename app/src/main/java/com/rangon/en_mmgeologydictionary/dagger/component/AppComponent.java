@@ -3,6 +3,7 @@ package com.rangon.en_mmgeologydictionary.dagger.component;
 import com.rangon.en_mmgeologydictionary.MainApplication;
 import com.rangon.en_mmgeologydictionary.dagger.SearchFragmentModule;
 import com.rangon.en_mmgeologydictionary.dagger.baseModules.ExecutorModule;
+import com.rangon.en_mmgeologydictionary.dagger.baseModules.SharedPrefModule;
 import com.rangon.en_mmgeologydictionary.dagger.baseModules.ThreadModule;
 import com.rangon.en_mmgeologydictionary.dagger.baseModules.WordDataModule;
 
@@ -16,7 +17,9 @@ import dagger.Component;
 @Component(modules = {
         ExecutorModule.class,
         ThreadModule.class,
-        WordDataModule.class
+        WordDataModule.class,
+        SharedPrefModule.class
+
 })
 @Singleton
 public interface AppComponent {
