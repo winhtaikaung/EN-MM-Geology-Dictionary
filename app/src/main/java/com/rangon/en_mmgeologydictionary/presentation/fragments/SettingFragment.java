@@ -22,6 +22,7 @@ import com.rangon.en_mmgeologydictionary.model.SettingItem;
 import com.rangon.en_mmgeologydictionary.presentation.presenters.SettingPresenter;
 import com.rangon.en_mmgeologydictionary.presentation.presenters.impl.SettingPresenterImpl;
 import com.rangon.en_mmgeologydictionary.presentation.ui.adapters.AdapterSettingList;
+import com.rangon.en_mmgeologydictionary.presentation.ui.viewholders.impl.SettingListItemViewPresenterImpl;
 import com.rangon.en_mmgeologydictionary.threading.MainThreadImpl;
 
 import java.util.List;
@@ -60,7 +61,7 @@ public class SettingFragment extends Fragment implements SettingPresenter.View, 
     @Override
     public void onLoadInitialData(List<SettingItem> settingItemList) {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
-        mSettingListAdapter = new AdapterSettingList(this);
+        mSettingListAdapter = new AdapterSettingList(this, new SettingListItemViewPresenterImpl(settingItemList));
         mSettingListAdapter.setOnItemClickListener(this);
         rvSettingList.setLayoutManager(mLayoutManager);
         rvSettingList.setAdapter(mSettingListAdapter);
